@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Career IQ — Sign In</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/global.css"/>
+</head>
+<body>
+<nav class="nav scrolled"><div class="nav-inner">
+  <a href="../index.html" class="nav-logo"><div class="logo-mark">IQ</div><span>Career<strong>IQ</strong></span></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="lang-btn" onclick="toggleLang()" id="langBtn">🌐 தமிழ்</button>
+    <div style="font-size:13px;color:var(--muted2);" data-en="Don't have an account?" data-ta="கணக்கு இல்லையா?">Don't have an account?</div>
+    <a href="register.html" style="color:var(--purple);font-size:13px;" data-en="Register free" data-ta="இலவசமாக பதிவு செய்">Register free</a>
+  </div>
+</div></nav>
+
+<div class="auth-wrap page-wrapper">
+  <div class="auth-left">
+    <div class="auth-left-bg"></div>
+    <div class="auth-left-content">
+      <div class="auth-brand"><div class="logo-mark">IQ</div>Career<strong>IQ</strong></div>
+      <h2 class="auth-headline" data-en="Welcome back." data-ta="மீண்டும் வரவேற்கிறோம்.">Welcome back.</h2>
+      <p class="auth-sub" data-en="Your AI career intelligence platform is ready. Sign in to access your personalized dashboard, job matches, and resume insights." data-ta="உங்கள் AI தொழில் நுண்ணறிவு தளம் தயார். உங்கள் தனிப்பயனாக்கப்பட்ட டாஷ்போர்டை அணுக உள்நுழையுங்கள்.">Your AI career intelligence platform is ready. Sign in to access your personalized dashboard, job matches, and resume insights.</p>
+      <div class="auth-features">
+        <div class="auth-feat"><div class="auth-feat-icon">🤖</div><span data-en="AI-powered job recommendations" data-ta="AI-இயங்கும் வேலை பரிந்துரைகள்">AI-powered job recommendations</span></div>
+        <div class="auth-feat"><div class="auth-feat-icon">🛡</div><span data-en="Fraud-free verified listings only" data-ta="மோசடி-இல்லாத சரிபார்க்கப்பட்ட பட்டியல்கள் மட்டுமே">Fraud-free verified listings only</span></div>
+        <div class="auth-feat"><div class="auth-feat-icon">🧪</div><span data-en="Mock interview AI scoring" data-ta="போலி நேர்காணல் AI மதிப்பீடு">Mock interview AI scoring</span></div>
+        <div class="auth-feat"><div class="auth-feat-icon">📊</div><span data-en="Skill gap radar analysis" data-ta="திறன் இடைவெளி ரேடார் பகுப்பாய்வு">Skill gap radar analysis</span></div>
+      </div>
+    </div>
+    <div class="auth-pulse"></div>
+  </div>
+  <div class="auth-right">
+    <div class="auth-form-box">
+      <div class="auth-form-title" data-en="Sign in" data-ta="உள்நுழை">Sign in</div>
+      <div class="auth-form-sub" data-en="New to Career IQ?" data-ta="Career IQ-ல் புதியவரா?">New to Career IQ? <a href="register.html" data-en="Create a free account" data-ta="இலவச கணக்கு உருவாக்கு">Create a free account</a></div>
+
+      <button class="google-btn" onclick="showToast('Google sign-in coming soon!','')">
+        <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/><path fill="#FBBC05" d="M3.964 10.71c-.18-.54-.282-1.117-.282-1.71s.102-1.17.282-1.71V4.958H.957C.347 6.173 0 7.548 0 9s.348 2.827.957 4.042l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/></svg>
+        <span data-en="Continue with Google" data-ta="Google உடன் தொடரவும்">Continue with Google</span>
+      </button>
+
+      <div class="auth-divider" data-en="or sign in with email" data-ta="அல்லது மின்னஞ்சலுடன் உள்நுழையுங்கள்">or sign in with email</div>
+
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label" data-en="Email address" data-ta="மின்னஞ்சல் முகவரி">Email address</label>
+          <input id="login-email" class="form-input" type="email" placeholder="you@example.com" required data-ph-en="you@example.com" data-ph-ta="நீங்கள்@example.com"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-en="Password" data-ta="கடவுச்சொல்">Password</label>
+          <input id="login-password" class="form-input" type="password" placeholder="••••••••" required/>
+        </div>
+        <div style="text-align:right;margin-bottom:1rem;"><a href="#" style="font-size:13px;color:var(--purple);" data-en="Forgot password?" data-ta="கடவுச்சொல் மறந்துவிட்டதா?">Forgot password?</a></div>
+        <button type="submit" class="submit-btn" id="loginBtn" data-en="Sign in to Career IQ" data-ta="Career IQ-ல் உள்நுழை">Sign in to Career IQ</button>
+      </form>
+
+      <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:1.5rem;line-height:1.6;">
+        <span data-en="Demo:" data-ta="டெமோ:">Demo:</span>
+        <span style="font-family:var(--font-mono);color:var(--purple);margin:0 4px;">demo@careeriq.ai</span> /
+        <span style="font-family:var(--font-mono);color:var(--purple);margin-left:4px;">demo123</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="../js/global.js"></script>
+<script src="../js/lang.js"></script>
+<script>
+function handleLogin(e){
+  e.preventDefault();
+  const email=document.getElementById('login-email').value;
+  const pass=document.getElementById('login-password').value;
+  const btn=document.getElementById('loginBtn');
+  btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Signing in...';
+  setTimeout(()=>{
+    if(email&&pass){
+      const name=email.split('@')[0];
+      localStorage.setItem('ciq_user',JSON.stringify({name,email,role:'fresher'}));
+      showToast('Welcome back! Redirecting...','success');
+      setTimeout(()=>window.location.href='dashboard.html',1000);
+    }else{showToast('Please fill in all fields','error');btn.disabled=false;btn.innerHTML='Sign in to Career IQ';}
+  },1200);
+}
+</script>
+</body>
+</html>

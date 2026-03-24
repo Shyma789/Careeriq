@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Career IQ — Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/global.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+</head>
+<body>
+<nav class="nav scrolled"><div class="nav-inner">
+  <a href="../index.html" class="nav-logo"><div class="logo-mark">IQ</div><span>Career<strong>IQ</strong></span></a>
+  <div class="nav-links">
+    <a href="dashboard.html" class="nav-link">Dashboard</a>
+    <a href="jobs.html" class="nav-link">Jobs</a>
+    <a href="resume.html" class="nav-link">Resume</a>
+    <a href="mentor.html" class="nav-link">Mentors</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button class="lang-btn" onclick="toggleLang()" id="langBtn">🌐 தமிழ்</button>
+    <div style="font-size:13px;color:var(--muted2);" id="navUser">Loading...</div>
+    <div class="user-avatar-sm" id="navAvatar">U</div>
+  </div>
+</div></nav>
+
+<div class="page-wrapper">
+<div class="dash-layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-mark" style="width:26px;height:26px;font-size:11px;">IQ</div>Career<strong>IQ</strong></div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-title" data-en="Main" data-ta="முக்கிய">Main</div>
+      <a href="dashboard.html" class="sidebar-link active"><span class="sidebar-link-icon">📊</span><span data-en="Dashboard" data-ta="டாஷ்போர்டு">Dashboard</span></a>
+      <a href="jobs.html" class="sidebar-link"><span class="sidebar-link-icon">🔍</span><span data-en="Job Search" data-ta="வேலை தேடல்">Job Search</span><span class="sidebar-link-badge">12</span></a>
+      <a href="resume.html" class="sidebar-link"><span class="sidebar-link-icon">📄</span><span data-en="Resume Builder" data-ta="ரெஸ்யூம் தயாரிப்பு">Resume Builder</span></a>
+      <a href="mentor.html" class="sidebar-link"><span class="sidebar-link-icon">👥</span><span data-en="Mentor Connect" data-ta="வழிகாட்டி இணைப்பு">Mentor Connect</span></a>
+      <div class="sidebar-section-title" data-en="AI Tools" data-ta="AI கருவிகள்">AI Tools</div>
+      <a href="skillgap.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span><span data-en="Skill Gap Radar" data-ta="திறன் இடைவெளி ரேடார்">Skill Gap Radar</span></a>
+      <a href="interview.html" class="sidebar-link"><span class="sidebar-link-icon">🧪</span><span data-en="Mock Interview AI" data-ta="போலி நேர்காணல் AI">Mock Interview AI</span></a>
+      <a href="jobs.html#voice" class="sidebar-link"><span class="sidebar-link-icon">🎤</span><span data-en="Voice Search" data-ta="குரல் தேடல்">Voice Search</span></a>
+    </nav>
+    <div class="sidebar-user">
+      <div class="user-avatar-sm" id="sideAvatar">U</div>
+      <div class="user-info-sm"><div class="name" id="sideName">Loading...</div><div class="role" id="sideRole">Fresher</div></div>
+    </div>
+  </aside>
+
+  <main class="dash-content">
+    <div class="dash-header">
+      <h1><span data-en="Good morning," data-ta="காலை வணக்கம்,">Good morning,</span> <span id="greetName" style="color:var(--purple);">there</span> 👋</h1>
+      <p data-en="Here's your AI-powered career intelligence overview for today." data-ta="இன்றைய உங்கள் AI-இயங்கும் தொழில் நுண்ணறிவு கண்ணோட்டம் இங்கே உள்ளது.">Here's your AI-powered career intelligence overview for today.</p>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card purple"><div class="kpi-label" data-en="Match Score" data-ta="பொருத்தம் மதிப்பெண்">Match Score</div><div class="kpi-value gradient-text" id="kpi-match">85%</div><div class="kpi-delta up">↑ 8% this week</div></div>
+      <div class="kpi-card cyan"><div class="kpi-label" data-en="New Job Matches" data-ta="புதிய வேலை பொருத்தங்கள்">New Job Matches</div><div class="kpi-value" style="color:var(--cyan);">47</div><div class="kpi-delta up">↑ 12 since yesterday</div></div>
+      <div class="kpi-card green"><div class="kpi-label" data-en="Resume Score" data-ta="ரெஸ்யூம் மதிப்பெண்">Resume Score</div><div class="kpi-value" style="color:var(--green);">75%</div><div class="kpi-delta up">↑ 5 points</div></div>
+      <div class="kpi-card amber"><div class="kpi-label" data-en="Applications" data-ta="விண்ணப்பங்கள்">Applications</div><div class="kpi-value" style="color:var(--amber);">8</div><div class="kpi-delta up">3 interviews pending</div></div>
+    </div>
+
+    <!-- NEW AI FEATURE CARDS -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;">
+      <a href="skillgap.html" style="background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(6,182,212,.1));border:1px solid rgba(139,92,246,.25);border-radius:14px;padding:1.25rem;text-decoration:none;display:block;transition:transform .2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+        <div style="font-size:28px;margin-bottom:8px;">📊</div>
+        <div style="font-family:var(--font-head);font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px;" data-en="Skill Gap Radar" data-ta="திறன் இடைவெளி ரேடார்">Skill Gap Radar</div>
+        <div style="font-size:12px;color:var(--muted2);" data-en="See exactly which skills you're missing for your target role" data-ta="உங்கள் இலக்கு பங்கிற்கு எந்த திறன்கள் இல்லை என்று பாருங்கள்">See exactly which skills you're missing</div>
+        <div style="margin-top:10px;font-size:11px;font-weight:600;color:var(--purple);" data-en="Open Radar →" data-ta="ரேடார் திற →">Open Radar →</div>
+      </a>
+      <a href="interview.html" style="background:linear-gradient(135deg,rgba(16,185,129,.12),rgba(245,158,11,.08));border:1px solid rgba(16,185,129,.25);border-radius:14px;padding:1.25rem;text-decoration:none;display:block;transition:transform .2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+        <div style="font-size:28px;margin-bottom:8px;">🧪</div>
+        <div style="font-family:var(--font-head);font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px;" data-en="Mock Interview AI" data-ta="போலி நேர்காணல் AI">Mock Interview AI</div>
+        <div style="font-size:12px;color:var(--muted2);" data-en="Practice real questions and get AI feedback on your answers" data-ta="நிஜமான கேள்விகளை பயிற்சி செய்து AI கருத்துரை பெறுங்கள்">Practice real questions and get AI feedback</div>
+        <div style="margin-top:10px;font-size:11px;font-weight:600;color:var(--green);" data-en="Start Practice →" data-ta="பயிற்சி தொடங்கு →">Start Practice →</div>
+      </a>
+      <a href="jobs.html" style="background:linear-gradient(135deg,rgba(239,68,68,.1),rgba(245,158,11,.08));border:1px solid rgba(239,68,68,.2);border-radius:14px;padding:1.25rem;text-decoration:none;display:block;transition:transform .2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform=''">
+        <div style="font-size:28px;margin-bottom:8px;">🎤</div>
+        <div style="font-family:var(--font-head);font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px;" data-en="Voice Job Search" data-ta="குரல் வேலை தேடல்">Voice Job Search</div>
+        <div style="font-size:12px;color:var(--muted2);" data-en="Speak your job search query in English or Tamil" data-ta="ஆங்கிலம் அல்லது தமிழில் வேலை தேடல் கேள்வியை பேசுங்கள்">Speak your query in English or Tamil</div>
+        <div style="margin-top:10px;font-size:11px;font-weight:600;color:var(--red);" data-en="Try Voice Search →" data-ta="குரல் தேடல் முயற்சி →">Try Voice Search →</div>
+      </a>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 340px;gap:20px;">
+      <div>
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-head"><div class="card-head-title" data-en="Top AI Job Matches" data-ta="சிறந்த AI வேலை பொருத்தங்கள்">Top AI Job Matches</div><a href="jobs.html" class="card-head-action" data-en="View all →" data-ta="அனைத்தையும் காண →">View all →</a></div>
+          <div class="card-body">
+            <div style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);">
+              <div style="width:44px;height:44px;border-radius:10px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">💻</div>
+              <div style="flex:1;"><div style="font-size:14px;font-weight:500;">Frontend Developer</div><div style="font-size:12px;color:var(--muted2);margin-top:2px;">TechCorp India · Chennai</div><div style="display:flex;gap:5px;margin-top:6px;flex-wrap:wrap;"><span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:rgba(16,185,129,.1);color:var(--green);border:1px solid rgba(16,185,129,.2);">✓ Verified</span><span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:var(--surface2);color:var(--muted2);border:1px solid var(--border);">₹4–6 LPA</span></div></div>
+              <div style="text-align:right;"><div style="font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--purple);">92%</div><div style="font-size:10px;color:var(--muted);">match</div></div>
+            </div>
+            <div style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);">
+              <div style="width:44px;height:44px;border-radius:10px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🤖</div>
+              <div style="flex:1;"><div style="font-size:14px;font-weight:500;">Junior AI Engineer</div><div style="font-size:12px;color:var(--muted2);margin-top:2px;">AI Labs · Hyderabad</div><div style="display:flex;gap:5px;margin-top:6px;"><span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:rgba(16,185,129,.1);color:var(--green);border:1px solid rgba(16,185,129,.2);">✓ Verified</span><span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:var(--surface2);color:var(--muted2);border:1px solid var(--border);">₹5–8 LPA</span></div></div>
+              <div style="text-align:right;"><div style="font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--purple);">87%</div><div style="font-size:10px;color:var(--muted);">match</div></div>
+            </div>
+            <div style="display:flex;gap:12px;padding:12px 0;">
+              <div style="width:44px;height:44px;border-radius:10px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📱</div>
+              <div style="flex:1;"><div style="font-size:14px;font-weight:500;">React Native Developer</div><div style="font-size:12px;color:var(--muted2);margin-top:2px;">StartupX · Bengaluru</div><div style="display:flex;gap:5px;margin-top:6px;"><span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:rgba(16,185,129,.1);color:var(--green);border:1px solid rgba(16,185,129,.2);">✓ Verified</span><span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:var(--surface2);color:var(--muted2);border:1px solid var(--border);">₹3–5 LPA</span></div></div>
+              <div style="text-align:right;"><div style="font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--purple);">81%</div><div style="font-size:10px;color:var(--muted);">match</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Application Tracker -->
+        <div class="card">
+          <div class="card-head"><div class="card-head-title" data-en="Application Tracker" data-ta="விண்ணப்ப கண்காணிப்பு">Application Tracker</div></div>
+          <div class="card-body">
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+              <div style="width:36px;height:36px;border-radius:8px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:16px;">💻</div>
+              <div style="flex:1;"><div style="font-size:13px;font-weight:500;">Frontend Developer</div><div style="font-size:11px;color:var(--muted2);">TechCorp India</div></div>
+              <span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(245,158,11,.1);color:var(--amber);" data-en="Interview" data-ta="நேர்காணல்">Interview</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+              <div style="width:36px;height:36px;border-radius:8px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:16px;">🤖</div>
+              <div style="flex:1;"><div style="font-size:13px;font-weight:500;">ML Intern</div><div style="font-size:11px;color:var(--muted2);">AI Startup</div></div>
+              <span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(16,185,129,.1);color:var(--green);" data-en="Offer!" data-ta="வாய்ப்பு!">Offer!</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 0;">
+              <div style="width:36px;height:36px;border-radius:8px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:16px;">📊</div>
+              <div style="flex:1;"><div style="font-size:13px;font-weight:500;">Data Analyst</div><div style="font-size:11px;color:var(--muted2);">Analytics Co.</div></div>
+              <span style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(6,182,212,.1);color:var(--cyan);" data-en="Applied" data-ta="விண்ணப்பிக்கப்பட்டது">Applied</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <!-- Resume Score -->
+        <div class="card">
+          <div class="card-head"><div class="card-head-title" data-en="Resume Score" data-ta="ரெஸ்யூம் மதிப்பெண்">Resume Score</div><a href="resume.html" class="card-head-action" data-en="Improve →" data-ta="மேம்படுத்து →">Improve →</a></div>
+          <div class="card-body" style="text-align:center;">
+            <div style="position:relative;width:90px;height:90px;margin:0 auto 1rem;">
+              <svg viewBox="0 0 100 100" style="width:100%;height:100%;"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(139,92,246,.1)" stroke-width="7"/><circle cx="50" cy="50" r="40" fill="none" stroke="url(#rg2)" stroke-width="7" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="63" transform="rotate(-90 50 50)"/><defs><linearGradient id="rg2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8B5CF6"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient></defs></svg>
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:18px;font-weight:800;background:linear-gradient(135deg,#8B5CF6,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">75%</div>
+            </div>
+            <p style="font-size:13px;color:var(--muted2);margin-bottom:1rem;" data-en="Good — a few improvements needed" data-ta="நல்லது — சில மேம்பாடுகள் தேவை">Good — a few improvements needed</p>
+            <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--muted2);"><div style="width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0;"></div><span data-en="Add quantified achievements" data-ta="அளவிடப்பட்ட சாதனைகளைச் சேர்க்கவும்">Add quantified achievements</span></div>
+            <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--muted2);"><div style="width:6px;height:6px;border-radius:50%;background:var(--amber);flex-shrink:0;"></div><span data-en="Include LinkedIn profile URL" data-ta="LinkedIn சுயவிவர URL சேர்க்கவும்">Include LinkedIn profile URL</span></div>
+            <div style="display:flex;align-items:center;gap:8px;padding:7px 0;font-size:12px;color:var(--muted2);"><div style="width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;"></div><span data-en="Skills section looks good" data-ta="திறன்கள் பகுதி நன்றாக உள்ளது">Skills section looks good</span></div>
+          </div>
+        </div>
+
+        <!-- Smart Alerts -->
+        <div class="card">
+          <div class="card-head"><div class="card-head-title" data-en="Smart Alerts" data-ta="ஸ்மார்ட் விழிப்பூட்டல்கள்">Smart Alerts</div><span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;background:var(--red);color:#fff;">3</span></div>
+          <div class="card-body">
+            <div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);"><div style="width:8px;height:8px;border-radius:50%;background:var(--purple);flex-shrink:0;margin-top:5px;"></div><div><div style="font-size:13px;font-weight:500;" data-en="New job match: React Dev at TechCorp" data-ta="புதிய வேலை பொருத்தம்: TechCorp-ல் React Dev">New job match: React Dev at TechCorp</div><div style="font-size:11px;color:var(--muted);">2 mins ago · 92% match</div></div></div>
+            <div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);"><div style="width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0;margin-top:5px;"></div><div><div style="font-size:13px;font-weight:500;" data-en="Interview reminder: AI Labs tomorrow" data-ta="நேர்காணல் நினைவூட்டல்: நாளை AI Labs">Interview reminder: AI Labs tomorrow</div><div style="font-size:11px;color:var(--muted);">1 hour ago</div></div></div>
+            <div style="display:flex;gap:10px;padding:10px 0;"><div style="width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:5px;"></div><div><div style="font-size:13px;font-weight:500;" data-en="Resume tip: Add 3 more ATS keywords" data-ta="ரெஸ்யூம் குறிப்பு: 3 ATS முக்கிய வார்த்தைகள் சேர்க்கவும்">Resume tip: Add 3 more ATS keywords</div><div style="font-size:11px;color:var(--muted);">Yesterday</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</div>
+
+<!-- CHATBOT -->
+<div id="chatBot" style="position:fixed;bottom:24px;right:24px;z-index:9999;">
+  <div id="chatWindow" style="display:none;width:320px;background:#0E0F14;border:1px solid rgba(139,92,246,.3);border-radius:16px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.4);margin-bottom:12px;">
+    <div style="background:linear-gradient(135deg,#8B5CF6,#06B6D4);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;">
+      <div><div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:#fff;" data-en="AI Career Advisor" data-ta="AI தொழில் ஆலோசகர்">AI Career Advisor</div><div style="font-size:11px;color:rgba(255,255,255,.8);" data-en="Ask me anything" data-ta="என்னிடம் கேளுங்கள்">Ask me anything</div></div>
+      <button onclick="toggleChat()" style="background:none;border:none;color:#fff;font-size:18px;cursor:pointer;">✕</button>
+    </div>
+    <div id="chatMessages" style="height:260px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px;"></div>
+    <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:8px;">
+      <input id="chatInput" type="text" placeholder="Ask about careers..." style="flex:1;background:#141720;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 12px;color:#EEF0F5;font-size:13px;outline:none;font-family:'DM Sans',sans-serif;" onkeypress="if(event.key==='Enter')sendChat()"/>
+      <button onclick="sendChat()" style="background:#8B5CF6;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;font-weight:600;">→</button>
+    </div>
+  </div>
+  <button onclick="toggleChat()" style="width:56px;height:56px;background:linear-gradient(135deg,#8B5CF6,#06B6D4);border:none;border-radius:50%;font-size:22px;cursor:pointer;box-shadow:0 4px 20px rgba(139,92,246,.5);display:flex;align-items:center;justify-content:center;margin-left:auto;">💬</button>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="../js/global.js"></script>
+<script src="../js/chatbot.js"></script>
+<script src="../js/lang.js"></script>
+<script>
+const u=JSON.parse(localStorage.getItem('ciq_user')||'{"name":"User","role":"fresher"}');
+const name=u.name||'User';
+document.getElementById('greetName').textContent=name;
+document.getElementById('navUser').textContent=name;
+document.getElementById('navAvatar').textContent=name[0].toUpperCase();
+document.getElementById('sideName').textContent=name;
+document.getElementById('sideAvatar').textContent=name[0].toUpperCase();
+document.getElementById('sideRole').textContent=u.role||'Fresher';
+</script>
+</body>
+</html>

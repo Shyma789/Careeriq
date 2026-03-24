@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Career IQ — Mock Interview AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/global.css"/>
+<style>
+.q-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:14px;transition:all .2s;}
+.q-card.active{border-color:rgba(139,92,246,.4);background:rgba(139,92,246,.04);}
+.q-card.done{border-color:rgba(16,185,129,.3);opacity:.8;}
+.q-num{font-family:var(--font-mono);font-size:11px;color:var(--muted);margin-bottom:8px;letter-spacing:1px;}
+.q-text{font-size:15px;font-weight:500;line-height:1.5;margin-bottom:1rem;}
+.q-hint{font-size:12px;color:var(--muted2);margin-bottom:1rem;line-height:1.5;}
+.answer-area{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-family:var(--font-body);font-size:14px;resize:vertical;outline:none;transition:border-color .2s;min-height:100px;}
+.answer-area:focus{border-color:var(--purple);}
+.answer-area::placeholder{color:var(--muted);}
+.score-circle{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:18px;font-weight:800;flex-shrink:0;}
+.feedback-card{background:var(--surface2);border-radius:10px;padding:1rem;margin-top:1rem;display:none;}
+.feedback-card.show{display:block;}
+.fb-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:6px;font-size:13px;color:var(--muted2);line-height:1.5;}
+.fb-row:last-child{margin-bottom:0;}
+.role-select-btn{background:var(--surface2);border:1px solid var(--border2);color:var(--muted2);font-size:13px;padding:8px 16px;border-radius:8px;cursor:pointer;transition:all .2s;font-family:var(--font-body);}
+.role-select-btn.active{background:var(--purple-dim);color:var(--purple);border-color:rgba(139,92,246,.35);}
+.overall-score{background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(6,182,212,.1));border:1px solid rgba(139,92,246,.25);border-radius:14px;padding:1.5rem;text-align:center;display:none;}
+.overall-score.show{display:block;}
+</style>
+</head>
+<body>
+<nav class="nav scrolled"><div class="nav-inner">
+  <a href="../index.html" class="nav-logo"><div class="logo-mark">IQ</div><span>Career<strong>IQ</strong></span></a>
+  <div class="nav-links"><a href="dashboard.html" class="nav-link">Dashboard</a><a href="jobs.html" class="nav-link">Jobs</a></div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button class="lang-btn" onclick="toggleLang()" id="langBtn">🌐 தமிழ்</button>
+    <a href="dashboard.html" class="btn-ghost" data-en="← Back" data-ta="← திரும்பு">← Back</a>
+  </div>
+</div></nav>
+
+<div class="page-wrapper">
+<div class="dash-layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-mark" style="width:26px;height:26px;font-size:11px;">IQ</div>Career<strong>IQ</strong></div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span><span data-en="Dashboard" data-ta="டாஷ்போர்டு">Dashboard</span></a>
+      <a href="jobs.html" class="sidebar-link"><span class="sidebar-link-icon">🔍</span>Job Search</a>
+      <a href="skillgap.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span>Skill Gap Radar</a>
+      <a href="interview.html" class="sidebar-link active"><span class="sidebar-link-icon">🧪</span><span data-en="Mock Interview" data-ta="போலி நேர்காணல்">Mock Interview</span></a>
+      <a href="resume.html" class="sidebar-link"><span class="sidebar-link-icon">📄</span>Resume Builder</a>
+      <a href="mentor.html" class="sidebar-link"><span class="sidebar-link-icon">👥</span>Mentors</a>
+    </nav>
+  </aside>
+
+  <main class="dash-content">
+    <div class="dash-header">
+      <h1 data-en="Mock Interview AI Simulator" data-ta="போலி நேர்காணல் AI சிமுலேட்டர்">🧪 Mock Interview AI Simulator</h1>
+      <p data-en="Practice real interview questions for your target role. Type your answer and AI will score it instantly on clarity, keywords, and confidence." data-ta="உங்கள் இலக்கு பங்கிற்கான நிஜமான நேர்காணல் கேள்விகளை பயிற்சி செய்யுங்கள். AI உங்கள் பதிலை உடனடியாக மதிப்பிடும்.">Practice real interview questions for your target role. Type your answer and AI will score it instantly on clarity, keywords, and confidence.</p>
+    </div>
+
+    <!-- Role selector -->
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.5rem;">
+      <button class="role-select-btn active" onclick="loadRole('frontend',this)" data-en="Frontend Dev" data-ta="ஃப்ரண்டெண்ட்">Frontend Dev</button>
+      <button class="role-select-btn" onclick="loadRole('data',this)" data-en="Data Analyst" data-ta="தரவு ஆய்வாளர்">Data Analyst</button>
+      <button class="role-select-btn" onclick="loadRole('ai',this)" data-en="AI/ML Engineer" data-ta="AI/ML பொறியாளர்">AI/ML Engineer</button>
+      <button class="role-select-btn" onclick="loadRole('general',this)" data-en="General / HR" data-ta="பொது / HR">General / HR</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 280px;gap:20px;align-items:start;">
+      <div id="questionsList"></div>
+
+      <div>
+        <!-- Score Summary -->
+        <div class="card" style="margin-bottom:14px;">
+          <div class="card-head"><div class="card-head-title" data-en="Session Score" data-ta="அமர்வு மதிப்பெண்">Session Score</div></div>
+          <div class="card-body" style="text-align:center;">
+            <div style="font-family:var(--font-head);font-size:48px;font-weight:800;background:linear-gradient(135deg,#8B5CF6,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;" id="totalScore">—</div>
+            <div style="font-size:12px;color:var(--muted2);margin-bottom:1rem;" data-en="Average score across answered questions" data-ta="பதில் அளித்த கேள்விகளின் சராசரி மதிப்பெண்">Average score across answered questions</div>
+            <div style="display:flex;flex-direction:column;gap:6px;" id="scoreBreakdown"></div>
+          </div>
+        </div>
+
+        <!-- Tips -->
+        <div class="card">
+          <div class="card-head"><div class="card-head-title" data-en="Interview Tips" data-ta="நேர்காணல் குறிப்புகள்">Interview Tips</div></div>
+          <div class="card-body">
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="font-size:12px;color:var(--muted2);line-height:1.6;display:flex;gap:8px;"><span style="color:var(--purple);font-weight:700;">1.</span><span data-en="Use STAR method: Situation, Task, Action, Result" data-ta="STAR முறை பயன்படுத்தவும்: நிலைமை, பணி, செயல், முடிவு">Use STAR method: Situation, Task, Action, Result</span></div>
+              <div style="font-size:12px;color:var(--muted2);line-height:1.6;display:flex;gap:8px;"><span style="color:var(--purple);font-weight:700;">2.</span><span data-en="Keep answers under 2 minutes (about 200 words)" data-ta="பதில்களை 2 நிமிடங்களுக்கு கீழ் வைக்கவும்">Keep answers under 2 minutes (about 200 words)</span></div>
+              <div style="font-size:12px;color:var(--muted2);line-height:1.6;display:flex;gap:8px;"><span style="color:var(--purple);font-weight:700;">3.</span><span data-en="Include specific numbers and results" data-ta="குறிப்பிட்ட எண்கள் மற்றும் முடிவுகளை சேர்க்கவும்">Include specific numbers and results</span></div>
+              <div style="font-size:12px;color:var(--muted2);line-height:1.6;display:flex;gap:8px;"><span style="color:var(--purple);font-weight:700;">4.</span><span data-en="Research the company before each interview" data-ta="ஒவ்வொரு நேர்காணலுக்கு முன் நிறுவனத்தை ஆராயுங்கள்">Research the company before each interview</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</div>
+
+<!-- CHATBOT -->
+<div id="chatBot" style="position:fixed;bottom:24px;right:24px;z-index:9999;">
+  <div id="chatWindow" style="display:none;width:320px;background:#0E0F14;border:1px solid rgba(139,92,246,.3);border-radius:16px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.4);margin-bottom:12px;"><div style="background:linear-gradient(135deg,#8B5CF6,#06B6D4);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;"><div><div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:#fff;">AI Career Advisor</div><div style="font-size:11px;color:rgba(255,255,255,.8);">Ask interview tips</div></div><button onclick="toggleChat()" style="background:none;border:none;color:#fff;font-size:18px;cursor:pointer;">✕</button></div><div id="chatMessages" style="height:260px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px;"></div><div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:8px;"><input id="chatInput" type="text" placeholder="Ask interview tips..." style="flex:1;background:#141720;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 12px;color:#EEF0F5;font-size:13px;outline:none;font-family:'DM Sans',sans-serif;" onkeypress="if(event.key==='Enter')sendChat()"/><button onclick="sendChat()" style="background:#8B5CF6;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;font-weight:600;">→</button></div></div>
+  <button onclick="toggleChat()" style="width:56px;height:56px;background:linear-gradient(135deg,#8B5CF6,#06B6D4);border:none;border-radius:50%;font-size:22px;cursor:pointer;box-shadow:0 4px 20px rgba(139,92,246,.5);display:flex;align-items:center;justify-content:center;margin-left:auto;">💬</button>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="../js/global.js"></script>
+<script src="../js/chatbot.js"></script>
+<script src="../js/lang.js"></script>
+<script>
+const allQuestions={
+  frontend:[
+    {q:'Tell me about yourself and why you are interested in frontend development.',hint:'Talk about your education, projects, and specific interest in building user interfaces.',keywords:['React','CSS','JavaScript','projects','UI','experience']},
+    {q:'Explain how the Virtual DOM in React works and why it is useful.',hint:'Cover the concept of a virtual representation of the DOM, diffing algorithm, and performance benefits.',keywords:['Virtual DOM','React','diffing','performance','reconciliation','update']},
+    {q:'How would you optimize the performance of a slow-loading React application?',hint:'Mention code splitting, lazy loading, memoization, image optimization, and bundle size reduction.',keywords:['lazy loading','memoization','code splitting','bundle','optimize','performance']},
+    {q:'Describe a challenging project you built and how you solved the problems.',hint:'Use the STAR method — describe the project, the challenge, your approach, and the outcome.',keywords:['project','challenge','solved','built','result','learned']},
+    {q:'Where do you see yourself in 3 years as a frontend developer?',hint:'Show ambition — mention full stack, tech lead, or specialization. Align with the company\'s growth.',keywords:['growth','learn','full stack','senior','team','contribute']},
+  ],
+  data:[
+    {q:'Walk me through how you would analyze a dataset to find business insights.',hint:'Mention data cleaning, exploratory analysis, visualization, and communicating findings.',keywords:['clean','explore','visualize','SQL','Python','insights','business']},
+    {q:'What is the difference between INNER JOIN and LEFT JOIN in SQL?',hint:'INNER JOIN returns only matching rows. LEFT JOIN returns all rows from the left table.',keywords:['INNER JOIN','LEFT JOIN','SQL','rows','matching','null','table']},
+    {q:'How would you explain a complex data finding to a non-technical manager?',hint:'Use simple language, avoid jargon, use visuals, and focus on business impact not technical details.',keywords:['simple','visual','business impact','non-technical','explain','dashboard']},
+    {q:'Tell me about a time you found an interesting pattern in data.',hint:'Describe the dataset, your analysis method, what you found, and what action it led to.',keywords:['pattern','analysis','found','action','dataset','insight','result']},
+    {q:'What tools do you use for data visualization and why?',hint:'Mention Power BI, Tableau, matplotlib, or seaborn. Explain why you chose each tool.',keywords:['Power BI','Tableau','matplotlib','visualization','tool','chart','dashboard']},
+  ],
+  ai:[
+    {q:'Explain the difference between supervised and unsupervised learning with examples.',hint:'Supervised uses labeled data (spam detection). Unsupervised finds patterns in unlabeled data (clustering).',keywords:['supervised','unsupervised','labeled','clustering','classification','patterns']},
+    {q:'How do you handle overfitting in a machine learning model?',hint:'Mention regularization, dropout, cross-validation, early stopping, and more training data.',keywords:['regularization','dropout','overfitting','cross-validation','training data','generalize']},
+    {q:'What is the difference between precision and recall? When is each important?',hint:'Precision: correct positive predictions. Recall: catching all actual positives. Medical vs spam use cases.',keywords:['precision','recall','F1','medical','spam','false positive','false negative']},
+    {q:'Describe a machine learning project you have worked on.',hint:'Explain the problem, dataset, model chosen, evaluation metrics, and results achieved.',keywords:['dataset','model','accuracy','results','problem','trained','evaluated']},
+    {q:'What do you know about Natural Language Processing?',hint:'Cover text preprocessing, tokenization, embeddings, transformers, and applications like chatbots.',keywords:['NLP','tokenization','BERT','embeddings','text','transformer','chatbot']},
+  ],
+  general:[
+    {q:'Tell me about yourself.',hint:'Give a 2-minute structured answer: background, education, key skills, and career goal.',keywords:['background','skills','experience','goal','passionate','fresher','CS']},
+    {q:'What is your greatest strength and how does it help in a professional setting?',hint:'Choose a real strength, give an example, and connect it to the job role.',keywords:['strength','example','helped','result','team','communication','problem solving']},
+    {q:'Why do you want to work at this company?',hint:'Research the company. Mention their products, culture, or growth. Show genuine interest.',keywords:['research','product','culture','growth','mission','excited','contribute']},
+    {q:'Describe a time you faced a difficult challenge and how you overcame it.',hint:'Use STAR method. Show resilience, problem-solving, and learning from the experience.',keywords:['challenge','solution','learned','team','result','overcame','steps']},
+    {q:'Where do you see yourself in 5 years?',hint:'Show ambition but also loyalty. Mention growing with the company and taking on more responsibility.',keywords:['grow','learn','contribute','responsibility','team','company','skill']},
+  ]
+};
+
+let scores=[];
+let currentRole='frontend';
+
+function scoreAnswer(answer,keywords){
+  if(!answer||answer.trim().length<20)return{total:0,clarity:0,keywords:0,confidence:0};
+  const words=answer.toLowerCase();
+  const kwMatches=keywords.filter(k=>words.includes(k.toLowerCase())).length;
+  const kwScore=Math.min(100,Math.round((kwMatches/keywords.length)*100));
+  const wordCount=answer.trim().split(/\s+/).length;
+  const clarityScore=wordCount<30?40:wordCount<80?70:wordCount<250?90:75;
+  const confScore=answer.match(/I |my |we |built|created|developed|implemented|designed|led/gi)?85:60;
+  const total=Math.round((kwScore+clarityScore+confScore)/3);
+  return{total,clarity:clarityScore,keywords:kwScore,confidence:confScore};
+}
+
+function loadRole(role,btn){
+  currentRole=role;
+  scores=[];
+  document.querySelectorAll('.role-select-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('totalScore').textContent='—';
+  document.getElementById('scoreBreakdown').innerHTML='';
+  renderQuestions();
+}
+
+function renderQuestions(){
+  const qs=allQuestions[currentRole];
+  const el=document.getElementById('questionsList');
+  el.innerHTML=qs.map((q,i)=>`
+    <div class="q-card" id="qcard${i}">
+      <div class="q-num">QUESTION ${i+1} OF ${qs.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-hint">💡 Hint: ${q.hint}</div>
+      <textarea class="answer-area" id="ans${i}" placeholder="Type your answer here... (minimum 30 words recommended)"></textarea>
+      <div style="display:flex;gap:10px;margin-top:10px;">
+        <button onclick="submitAnswer(${i})" style="background:var(--purple);color:#fff;border:none;border-radius:8px;padding:9px 20px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;" data-en="Submit & Score →" data-ta="சமர்ப்பி & மதிப்பிடு →">Submit & Score →</button>
+        <button onclick="document.getElementById('ans${i}').value=''" style="background:transparent;color:var(--muted2);border:1px solid var(--border2);border-radius:8px;padding:9px 16px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;" data-en="Clear" data-ta="அழி">Clear</button>
+      </div>
+      <div class="feedback-card" id="fb${i}"></div>
+    </div>
+  `).join('');
+}
+
+function submitAnswer(idx){
+  const qs=allQuestions[currentRole];
+  const answer=document.getElementById('ans'+idx).value;
+  if(!answer||answer.trim().split(/\s+/).length<10){showToast('Please write at least 10 words!','error');return;}
+  const s=scoreAnswer(answer,qs[idx].keywords);
+  scores[idx]=s.total;
+  const card=document.getElementById('qcard'+idx);
+  card.classList.add('done');
+  const fb=document.getElementById('fb'+idx);
+  const scoreColor=s.total>=80?'var(--green)':s.total>=60?'var(--amber)':'var(--red)';
+  fb.innerHTML=`
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px;">
+      <div class="score-circle" style="background:${scoreColor}22;color:${scoreColor};border:2px solid ${scoreColor}44;">${s.total}%</div>
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;">${s.total>=80?'Excellent!':s.total>=60?'Good answer':'Needs improvement'}</div>
+        <div style="font-size:12px;color:var(--muted2);">AI scoring complete</div>
+      </div>
+    </div>
+    <div class="fb-row"><div style="width:6px;height:6px;border-radius:50%;background:var(--purple);flex-shrink:0;margin-top:6px;"></div>Clarity: ${s.clarity}% — ${s.clarity>=80?'Well structured answer':'Try organizing with: situation → action → result'}</div>
+    <div class="fb-row"><div style="width:6px;height:6px;border-radius:50%;background:var(--cyan);flex-shrink:0;margin-top:6px;"></div>Keywords: ${s.keywords}% — ${s.keywords>=70?'Good use of technical terms':'Include: '+qs[idx].keywords.slice(0,3).join(', ')}</div>
+    <div class="fb-row"><div style="width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:6px;"></div>Confidence: ${s.confidence}% — ${s.confidence>=80?'Strong, decisive language used':'Use action verbs: built, designed, implemented, led'}</div>
+  `;
+  fb.classList.add('show');
+  updateOverallScore();
+  showToast(`Scored ${s.total}% — ${s.total>=80?'Excellent!':s.total>=60?'Good!':'Keep practicing!'}`,s.total>=70?'success':'');
+}
+
+function updateOverallScore(){
+  const answered=scores.filter(s=>s!==undefined);
+  if(!answered.length)return;
+  const avg=Math.round(answered.reduce((a,b)=>a+b,0)/answered.length);
+  document.getElementById('totalScore').textContent=avg+'%';
+  document.getElementById('scoreBreakdown').innerHTML=`
+    <div style="font-size:12px;color:var(--muted2);">${answered.length} of ${allQuestions[currentRole].length} answered</div>
+    <div style="height:6px;background:var(--surface3);border-radius:3px;overflow:hidden;margin-top:6px;"><div style="height:100%;width:${avg}%;background:${avg>=80?'var(--green)':avg>=60?'var(--amber)':'var(--red)'};border-radius:3px;transition:width .8s ease;"></div></div>
+    <div style="font-size:11px;color:${avg>=80?'var(--green)':avg>=60?'var(--amber)':'var(--red)'};margin-top:4px;">${avg>=80?'🏆 Interview ready!':avg>=60?'👍 Good progress — keep practicing':'📚 More practice needed'}</div>
+  `;
+}
+
+window.addEventListener('DOMContentLoaded',()=>renderQuestions());
+</script>
+</body>
+</html>

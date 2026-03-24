@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Career IQ — Job Search</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/global.css"/>
+<style>
+.search-bar{display:flex;gap:10px;background:var(--surface);border:1px solid var(--border2);border-radius:40px;padding:8px 8px 8px 20px;margin-bottom:1.5rem;align-items:center;}
+.search-input{flex:1;background:transparent;border:none;color:var(--text);font-size:15px;outline:none;font-family:var(--font-body);}
+.search-input::placeholder{color:var(--muted);}
+.search-btn{background:var(--purple);color:#fff;border:none;border-radius:40px;padding:10px 24px;font-size:14px;font-weight:500;cursor:pointer;white-space:nowrap;transition:background .2s;font-family:var(--font-body);}
+.search-btn:hover{background:#7C3AED;}
+.voice-btn{display:flex;align-items:center;gap:6px;background:var(--surface2);border:1.5px solid var(--border2);color:var(--muted2);font-size:13px;padding:8px 16px;border-radius:40px;cursor:pointer;transition:all .2s;white-space:nowrap;font-family:var(--font-body);}
+.voice-btn:hover{color:var(--purple);border-color:rgba(139,92,246,.35);}
+.voice-btn.listening{color:#fff;background:var(--red);border-color:var(--red);animation:vpulse .8s ease infinite alternate;}
+@keyframes vpulse{from{box-shadow:0 0 0 0 rgba(239,68,68,.4);}to{box-shadow:0 0 0 8px rgba(239,68,68,0);}}
+.filter-chip{background:var(--surface);border:1px solid var(--border2);color:var(--muted2);font-size:12px;padding:6px 14px;border-radius:20px;cursor:pointer;transition:all .2s;}
+.filter-chip:hover,.filter-chip.active{background:var(--purple-dim);color:var(--purple);border-color:rgba(139,92,246,.3);}
+.job-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:12px;transition:all .25s;cursor:pointer;}
+.job-card:hover{border-color:rgba(139,92,246,.25);transform:translateY(-2px);}
+.apply-btn{background:var(--purple);color:#fff;border:none;border-radius:8px;padding:8px 20px;font-size:13px;font-weight:500;cursor:pointer;transition:background .2s;font-family:var(--font-body);}
+.apply-btn:hover{background:#7C3AED;}
+.apply-btn.applied{background:var(--green);cursor:default;}
+.fraud-badge{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--green);background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);padding:4px 10px;border-radius:20px;}
+.voice-transcript{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--purple);margin-bottom:1rem;display:none;}
+.voice-transcript.show{display:block;}
+</style>
+</head>
+<body>
+<nav class="nav scrolled"><div class="nav-inner">
+  <a href="../index.html" class="nav-logo"><div class="logo-mark">IQ</div><span>Career<strong>IQ</strong></span></a>
+  <div class="nav-links"><a href="dashboard.html" class="nav-link">Dashboard</a><a href="jobs.html" class="nav-link active">Jobs</a><a href="resume.html" class="nav-link">Resume</a><a href="mentor.html" class="nav-link">Mentors</a></div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button class="lang-btn" onclick="toggleLang()" id="langBtn">🌐 தமிழ்</button>
+    <a href="dashboard.html" class="btn-ghost" data-en="← Back" data-ta="← திரும்பு">← Back</a>
+  </div>
+</div></nav>
+
+<div class="page-wrapper">
+<div class="dash-layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-mark" style="width:26px;height:26px;font-size:11px;">IQ</div>Career<strong>IQ</strong></div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span>Dashboard</a>
+      <a href="jobs.html" class="sidebar-link active"><span class="sidebar-link-icon">🔍</span><span data-en="Job Search" data-ta="வேலை தேடல்">Job Search</span></a>
+      <a href="skillgap.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span>Skill Gap Radar</a>
+      <a href="interview.html" class="sidebar-link"><span class="sidebar-link-icon">🧪</span>Mock Interview</a>
+      <a href="resume.html" class="sidebar-link"><span class="sidebar-link-icon">📄</span>Resume Builder</a>
+      <a href="mentor.html" class="sidebar-link"><span class="sidebar-link-icon">👥</span>Mentors</a>
+      <div class="sidebar-section-title">Filters</div>
+      <a href="#" class="sidebar-link" onclick="filterByType('remote',this)"><span class="sidebar-link-icon">🏠</span>Remote</a>
+      <a href="#" class="sidebar-link" onclick="filterByType('intern',this)"><span class="sidebar-link-icon">🎓</span>Internships</a>
+      <a href="#" class="sidebar-link" onclick="filterByType('verified',this)"><span class="sidebar-link-icon">✓</span>Verified Only</a>
+    </nav>
+  </aside>
+
+  <main class="dash-content">
+    <div class="dash-header">
+      <h1 data-en="AI Job Search" data-ta="AI வேலை தேடல்">🔍 AI Job Search</h1>
+      <p data-en="All listings are fraud-verified. Search by typing or use Voice Search — speak in English or Tamil!" data-ta="அனைத்து பட்டியல்களும் மோசடி சரிபார்க்கப்பட்டவை. தட்டச்சு செய்து அல்லது குரல் தேடல் பயன்படுத்தவும் — ஆங்கிலம் அல்லது தமிழில் பேசுங்கள்!">All listings are fraud-verified. Search by typing or use Voice Search — speak in English or Tamil!</p>
+    </div>
+
+    <!-- SEARCH BAR -->
+    <div style="display:flex;gap:10px;margin-bottom:1rem;flex-wrap:wrap;" id="voice">
+      <div class="search-bar" style="flex:1;margin-bottom:0;">
+        <input class="search-input" id="searchInput" type="text" placeholder="Search roles, skills, companies..." data-ph-en="Search roles, skills, companies..." data-ph-ta="பங்குகள், திறன்கள், நிறுவனங்கள் தேடுங்கள்..." onkeypress="if(event.key==='Enter')searchJobs()"/>
+        <button class="search-btn" onclick="searchJobs()" data-en="Search" data-ta="தேடு">Search</button>
+      </div>
+      <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()">🎤 <span id="voiceBtnText" data-en="Voice Search" data-ta="குரல் தேடல்">Voice Search</span></button>
+    </div>
+
+    <!-- Voice transcript display -->
+    <div class="voice-transcript" id="voiceTranscript">
+      🎤 <span id="transcriptText"></span>
+    </div>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem;">
+      <div class="filter-chip active" onclick="setFilter(this,'all')" data-en="All" data-ta="அனைத்தும்">All</div>
+      <div class="filter-chip" onclick="setFilter(this,'remote')" data-en="Remote" data-ta="தொலைநிலை">Remote</div>
+      <div class="filter-chip" onclick="setFilter(this,'hybrid')" data-en="Hybrid" data-ta="கலவை">Hybrid</div>
+      <div class="filter-chip" onclick="setFilter(this,'fresher')" data-en="Fresher friendly" data-ta="புதியவருக்கு ஏற்றது">Fresher friendly</div>
+      <div class="filter-chip" onclick="setFilter(this,'verified')" data-en="Verified only" data-ta="சரிபார்க்கப்பட்டவை மட்டும்">Verified only</div>
+    </div>
+
+    <div style="font-size:13px;color:var(--muted2);margin-bottom:1rem;" id="resultsCount" data-en="Showing 6 AI-matched jobs for you" data-ta="உங்களுக்கு 6 AI-பொருத்தப்பட்ட வேலைகள் காட்டப்படுகின்றன">Showing 6 AI-matched jobs for you</div>
+
+    <div id="jobList">
+      <div class="job-card">
+        <div style="display:flex;gap:14px;margin-bottom:1rem;">
+          <div style="width:52px;height:52px;border-radius:10px;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">💻</div>
+          <div style="flex:1;"><div style="font-family:var(--font-head);font-size:16px;font-weight:700;margin-bottom:3px;" data-en="Frontend Developer" data-ta="ஃப்ரண்டெண்ட் டெவலப்பர்">Frontend Developer</div><div style="font-size:13px;color:var(--muted2);" data-en="TechCorp India · Chennai" data-ta="TechCorp India · சென்னை">TechCorp India · Chennai</div></div>
+          <div style="text-align:right;"><div style="font-family:var(--font-head);font-size:26px;font-weight:800;color:var(--purple);">92%</div><div style="font-size:10px;color:var(--muted);">AI match</div></div>
+        </div>
+        <div style="font-size:13px;color:var(--muted2);line-height:1.6;margin-bottom:1rem;" data-en="Build modern web applications using React.js and TypeScript. Work with a talented team on real-world products." data-ta="React.js மற்றும் TypeScript பயன்படுத்தி நவீன வலை பயன்பாடுகளை உருவாக்குங்கள்.">Build modern web applications using React.js and TypeScript. Work with a talented team on real-world products.</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+          <div style="display:flex;gap:6px;flex-wrap:wrap;"><span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:rgba(16,185,129,.1);color:var(--green);border:1px solid rgba(16,185,129,.2);">✓ Verified</span><span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:rgba(6,182,212,.1);color:var(--cyan);border:1px solid rgba(6,182,212,.2);">Remote</span><span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:var(--surface2);color:var(--muted2);border:1px solid var(--border);">₹4–6 LPA</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><div class="fraud-badge">🛡 Fraud-free</div><button class="apply-btn" onclick="applyJob(this,'Frontend Developer')" data-en="Apply Now" data-ta="இப்போது விண்ணப்பிக்கவும்">Apply Now</button></div>
+        </div>
+      </div>
+      <div class="job-card">
+        <div style="display:flex;gap:14px;margin-bottom:1rem;">
+          <div style="width:52px;height:52px;border-radius:10px;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🤖</div>
+          <div style="flex:1;"><div style="font-family:var(--font-head);font-size:16px;font-weight:700;margin-bottom:3px;" data-en="Junior AI/ML Engineer" data-ta="இளைய AI/ML பொறியாளர்">Junior AI/ML Engineer</div><div style="font-size:13px;color:var(--muted2);" data-en="AI Labs · Hyderabad" data-ta="AI Labs · ஹைதராபாத்">AI Labs · Hyderabad</div></div>
+          <div style="text-align:right;"><div style="font-family:var(--font-head);font-size:26px;font-weight:800;color:var(--purple);">87%</div><div style="font-size:10px;color:var(--muted);">AI match</div></div>
+        </div>
+        <div style="font-size:13px;color:var(--muted2);line-height:1.6;margin-bottom:1rem;" data-en="Work on NLP models, recommendation systems, and ML pipelines. Great for freshers with Python and ML fundamentals." data-ta="NLP மாதிரிகள், பரிந்துரை அமைப்புகள் மற்றும் ML குழாய்களில் பணியாற்றுங்கள்.">Work on NLP models, recommendation systems, and ML pipelines. Great for freshers with Python and ML fundamentals.</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+          <div style="display:flex;gap:6px;flex-wrap:wrap;"><span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:rgba(16,185,129,.1);color:var(--green);border:1px solid rgba(16,185,129,.2);">✓ Verified</span><span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:var(--surface2);color:var(--muted2);border:1px solid var(--border);">₹5–8 LPA</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><div class="fraud-badge">🛡 Fraud-free</div><button class="apply-btn" onclick="applyJob(this,'AI/ML Engineer')" data-en="Apply Now" data-ta="இப்போது விண்ணப்பிக்கவும்">Apply Now</button></div>
+        </div>
+      </div>
+      <div class="job-card">
+        <div style="display:flex;gap:14px;margin-bottom:1rem;">
+          <div style="width:52px;height:52px;border-radius:10px;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">📊</div>
+          <div style="flex:1;"><div style="font-family:var(--font-head);font-size:16px;font-weight:700;margin-bottom:3px;" data-en="Data Analyst — Fresher" data-ta="தரவு ஆய்வாளர் — புதியவர்">Data Analyst — Fresher</div><div style="font-size:13px;color:var(--muted2);" data-en="Analytics Pro · Mumbai" data-ta="Analytics Pro · மும்பை">Analytics Pro · Mumbai</div></div>
+          <div style="text-align:right;"><div style="font-family:var(--font-head);font-size:26px;font-weight:800;color:var(--purple);">78%</div><div style="font-size:10px;color:var(--muted);">AI match</div></div>
+        </div>
+        <div style="font-size:13px;color:var(--muted2);line-height:1.6;margin-bottom:1rem;" data-en="Analyze large datasets, create dashboards, and generate insights. SQL and Python training provided." data-ta="பெரிய தரவுத்தொகுப்புகளை பகுப்பாய்வு செய்யுங்கள், டாஷ்போர்டுகள் உருவாக்குங்கள்.">Analyze large datasets, create dashboards, and generate insights. SQL and Python training provided.</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+          <div style="display:flex;gap:6px;flex-wrap:wrap;"><span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:rgba(16,185,129,.1);color:var(--green);border:1px solid rgba(16,185,129,.2);">✓ Verified</span><span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:var(--surface2);color:var(--muted2);border:1px solid var(--border);">₹3–4 LPA</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><div class="fraud-badge">🛡 Fraud-free</div><button class="apply-btn" onclick="applyJob(this,'Data Analyst')" data-en="Apply Now" data-ta="இப்போது விண்ணப்பிக்கவும்">Apply Now</button></div>
+        </div>
+      </div>
+      <div class="job-card">
+        <div style="display:flex;gap:14px;margin-bottom:1rem;">
+          <div style="width:52px;height:52px;border-radius:10px;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🎨</div>
+          <div style="flex:1;"><div style="font-family:var(--font-head);font-size:16px;font-weight:700;margin-bottom:3px;" data-en="UI/UX Designer" data-ta="UI/UX வடிவமைப்பாளர்">UI/UX Designer</div><div style="font-size:13px;color:var(--muted2);" data-en="DesignHub · Remote" data-ta="DesignHub · தொலைநிலை">DesignHub · Remote</div></div>
+          <div style="text-align:right;"><div style="font-family:var(--font-head);font-size:26px;font-weight:800;color:var(--purple);">74%</div><div style="font-size:10px;color:var(--muted);">AI match</div></div>
+        </div>
+        <div style="font-size:13px;color:var(--muted2);line-height:1.6;margin-bottom:1rem;" data-en="Design beautiful user-centered interfaces for web and mobile. Figma and Adobe XD skills essential." data-ta="வலை மற்றும் மொபைலுக்கான அழகான பயனர்-மையமாக இடைமுகங்களை வடிவமைக்கவும்.">Design beautiful user-centered interfaces for web and mobile. Figma and Adobe XD skills essential.</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+          <div style="display:flex;gap:6px;flex-wrap:wrap;"><span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:rgba(16,185,129,.1);color:var(--green);border:1px solid rgba(16,185,129,.2);">✓ Verified</span><span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:rgba(6,182,212,.1);color:var(--cyan);border:1px solid rgba(6,182,212,.2);">Remote</span><span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:var(--surface2);color:var(--muted2);border:1px solid var(--border);">₹3–5 LPA</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><div class="fraud-badge">🛡 Fraud-free</div><button class="apply-btn" onclick="applyJob(this,'UI/UX Designer')" data-en="Apply Now" data-ta="இப்போது விண்ணப்பிக்கவும்">Apply Now</button></div>
+        </div>
+      </div>
+      <div class="job-card">
+        <div style="display:flex;gap:14px;margin-bottom:1rem;">
+          <div style="width:52px;height:52px;border-radius:10px;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">☁</div>
+          <div style="flex:1;"><div style="font-family:var(--font-head);font-size:16px;font-weight:700;margin-bottom:3px;" data-en="Cloud Engineer Intern" data-ta="கிளவுட் பொறியாளர் இன்டர்ன்">Cloud Engineer Intern</div><div style="font-size:13px;color:var(--muted2);" data-en="CloudBase · Pune" data-ta="CloudBase · பூனே">CloudBase · Pune</div></div>
+          <div style="text-align:right;"><div style="font-family:var(--font-head);font-size:26px;font-weight:800;color:var(--purple);">69%</div><div style="font-size:10px;color:var(--muted);">AI match</div></div>
+        </div>
+        <div style="font-size:13px;color:var(--muted2);line-height:1.6;margin-bottom:1rem;" data-en="6-month internship in cloud infrastructure using AWS and GCP. PPO available for top performers." data-ta="AWS மற்றும் GCP பயன்படுத்தி கிளவுட் உள்கட்டமைப்பில் 6 மாத இன்டர்ன்ஷிப்.">6-month internship in cloud infrastructure using AWS and GCP. PPO available for top performers.</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+          <div style="display:flex;gap:6px;flex-wrap:wrap;"><span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:rgba(16,185,129,.1);color:var(--green);border:1px solid rgba(16,185,129,.2);">✓ Verified</span><span style="font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:var(--surface2);color:var(--muted2);border:1px solid var(--border);">₹15k/month</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><div class="fraud-badge">🛡 Fraud-free</div><button class="apply-btn" onclick="applyJob(this,'Cloud Intern')" data-en="Apply Now" data-ta="இப்போது விண்ணப்பிக்கவும்">Apply Now</button></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</div>
+
+<!-- CHATBOT -->
+<div id="chatBot" style="position:fixed;bottom:24px;right:24px;z-index:9999;">
+  <div id="chatWindow" style="display:none;width:320px;background:#0E0F14;border:1px solid rgba(139,92,246,.3);border-radius:16px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.4);margin-bottom:12px;"><div style="background:linear-gradient(135deg,#8B5CF6,#06B6D4);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;"><div><div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:#fff;">AI Career Advisor</div><div style="font-size:11px;color:rgba(255,255,255,.8);">Ask about jobs</div></div><button onclick="toggleChat()" style="background:none;border:none;color:#fff;font-size:18px;cursor:pointer;">✕</button></div><div id="chatMessages" style="height:260px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px;"></div><div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:8px;"><input id="chatInput" type="text" placeholder="Ask about jobs..." style="flex:1;background:#141720;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 12px;color:#EEF0F5;font-size:13px;outline:none;font-family:'DM Sans',sans-serif;" onkeypress="if(event.key==='Enter')sendChat()"/><button onclick="sendChat()" style="background:#8B5CF6;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;font-weight:600;">→</button></div></div>
+  <button onclick="toggleChat()" style="width:56px;height:56px;background:linear-gradient(135deg,#8B5CF6,#06B6D4);border:none;border-radius:50%;font-size:22px;cursor:pointer;box-shadow:0 4px 20px rgba(139,92,246,.5);display:flex;align-items:center;justify-content:center;margin-left:auto;">💬</button>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="../js/global.js"></script>
+<script src="../js/chatbot.js"></script>
+<script src="../js/lang.js"></script>
+<script>
+// ── VOICE SEARCH ──
+let recognition=null;
+let isListening=false;
+
+function initVoice(){
+  const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SpeechRecognition){showToast('Voice search not supported in this browser. Use Chrome!','error');return null;}
+  const r=new SpeechRecognition();
+  r.continuous=false;
+  r.interimResults=true;
+  r.lang='en-IN'; // supports Tamil too in Chrome
+
+  r.onresult=(e)=>{
+    let interim='',final='';
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      const t=e.results[i][0].transcript;
+      if(e.results[i].isFinal)final+=t;
+      else interim+=t;
+    }
+    const text=final||interim;
+    document.getElementById('searchInput').value=text;
+    document.getElementById('transcriptText').textContent=`"${text}"`;
+    document.getElementById('voiceTranscript').classList.add('show');
+    if(final){stopListening();searchJobs();}
+  };
+  r.onerror=()=>{stopListening();showToast('Voice error. Please try again.','error');};
+  r.onend=()=>stopListening();
+  return r;
+}
+
+function toggleVoice(){
+  if(isListening){stopListening();return;}
+  recognition=initVoice();
+  if(!recognition)return;
+  isListening=true;
+  recognition.start();
+  document.getElementById('voiceBtn').classList.add('listening');
+  document.getElementById('voiceBtnText').textContent='Listening...';
+  document.getElementById('voiceTranscript').classList.remove('show');
+  showToast('🎤 Listening... Speak in English or Tamil!','success');
+}
+
+function stopListening(){
+  isListening=false;
+  if(recognition)try{recognition.stop();}catch(e){}
+  document.getElementById('voiceBtn').classList.remove('listening');
+  document.getElementById('voiceBtnText').setAttribute('data-en','Voice Search');
+  document.getElementById('voiceBtnText').textContent='Voice Search';
+}
+
+function searchJobs(){
+  const q=document.getElementById('searchInput').value;
+  if(q)showToast(`AI searching: "${q}"...`,'');
+}
+function setFilter(el,type){document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');showToast(`Filter: ${el.textContent.trim()}`);}
+function filterByType(type,el){document.querySelectorAll('.sidebar-link').forEach(l=>l.classList.remove('active'));el.classList.add('active');showToast(`Showing: ${type} jobs`);}
+function applyJob(btn,title){btn.textContent='Applied ✓';btn.classList.add('applied');btn.disabled=true;showToast(`Applied to ${title}! Added to tracker.`,'success');}
+</script>
+</body>
+</html>

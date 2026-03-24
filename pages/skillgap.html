@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Career IQ — Skill Gap Radar</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/global.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+.role-btn{background:var(--surface2);border:1px solid var(--border2);color:var(--muted2);font-size:13px;padding:8px 18px;border-radius:8px;cursor:pointer;transition:all .2s;font-family:var(--font-body);}
+.role-btn.active{background:var(--purple-dim);color:var(--purple);border-color:rgba(139,92,246,.35);}
+.skill-legend-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
+.skill-legend-item:last-child{border-bottom:none;}
+.sli-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.sli-bar{flex:1;height:6px;background:var(--surface3);border-radius:3px;overflow:hidden;}
+.sli-fill{height:100%;border-radius:3px;transition:width 1.2s ease;}
+.gap-badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;white-space:nowrap;}
+</style>
+</head>
+<body>
+<nav class="nav scrolled"><div class="nav-inner">
+  <a href="../index.html" class="nav-logo"><div class="logo-mark">IQ</div><span>Career<strong>IQ</strong></span></a>
+  <div class="nav-links"><a href="dashboard.html" class="nav-link">Dashboard</a><a href="jobs.html" class="nav-link">Jobs</a></div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button class="lang-btn" onclick="toggleLang()" id="langBtn">🌐 தமிழ்</button>
+    <a href="dashboard.html" class="btn-ghost" data-en="← Back" data-ta="← திரும்பு">← Back</a>
+  </div>
+</div></nav>
+
+<div class="page-wrapper">
+<div class="dash-layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-mark" style="width:26px;height:26px;font-size:11px;">IQ</div>Career<strong>IQ</strong></div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span><span data-en="Dashboard" data-ta="டாஷ்போர்டு">Dashboard</span></a>
+      <a href="jobs.html" class="sidebar-link"><span class="sidebar-link-icon">🔍</span><span data-en="Job Search" data-ta="வேலை தேடல்">Job Search</span></a>
+      <a href="skillgap.html" class="sidebar-link active"><span class="sidebar-link-icon">📊</span><span data-en="Skill Gap Radar" data-ta="திறன் இடைவெளி ரேடார்">Skill Gap Radar</span></a>
+      <a href="interview.html" class="sidebar-link"><span class="sidebar-link-icon">🧪</span><span data-en="Mock Interview" data-ta="போலி நேர்காணல்">Mock Interview</span></a>
+      <a href="resume.html" class="sidebar-link"><span class="sidebar-link-icon">📄</span><span data-en="Resume Builder" data-ta="ரெஸ்யூம் தயாரிப்பு">Resume Builder</span></a>
+      <a href="mentor.html" class="sidebar-link"><span class="sidebar-link-icon">👥</span><span data-en="Mentors" data-ta="வழிகாட்டிகள்">Mentors</span></a>
+    </nav>
+  </aside>
+
+  <main class="dash-content">
+    <div class="dash-header">
+      <h1 data-en="Skill Gap Radar" data-ta="திறன் இடைவெளி ரேடார்">📊 Skill Gap Radar</h1>
+      <p data-en="Select your target role to see which skills you have vs what you need. The chart animates live as you switch roles." data-ta="உங்கள் இலக்கு பங்கைத் தேர்ந்தெடுங்கள். பங்குகளை மாற்றும்போது விளக்கப்படம் நேரடியாக அனிமேட்டாகிறது.">Select your target role to see which skills you have vs what you need. The chart animates live as you switch roles.</p>
+    </div>
+
+    <!-- Role Selector -->
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:2rem;">
+      <button class="role-btn active" onclick="setRole('frontend',this)" data-en="Frontend Developer" data-ta="ஃப்ரண்டெண்ட் டெவலப்பர்">Frontend Developer</button>
+      <button class="role-btn" onclick="setRole('data',this)" data-en="Data Analyst" data-ta="தரவு ஆய்வாளர்">Data Analyst</button>
+      <button class="role-btn" onclick="setRole('ai',this)" data-en="AI/ML Engineer" data-ta="AI/ML பொறியாளர்">AI/ML Engineer</button>
+      <button class="role-btn" onclick="setRole('fullstack',this)" data-en="Full Stack Dev" data-ta="முழு ஸ்டாக் டெவலப்பர்">Full Stack Dev</button>
+      <button class="role-btn" onclick="setRole('design',this)" data-en="UI/UX Designer" data-ta="UI/UX வடிவமைப்பாளர்">UI/UX Designer</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:start;">
+      <!-- RADAR CHART -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-head-title">
+            <span data-en="Your Skills vs" data-ta="உங்கள் திறன்கள் vs">Your Skills vs</span>
+            <span id="roleLabel" style="color:var(--purple);">Frontend Developer</span>
+            <span data-en="Requirements" data-ta="தேவைகள்">Requirements</span>
+          </div>
+        </div>
+        <div class="card-body" style="display:flex;justify-content:center;">
+          <div style="width:340px;height:340px;"><canvas id="radarChart"></canvas></div>
+        </div>
+        <div style="padding:1rem 1.25rem;border-top:1px solid var(--border);display:flex;gap:1.5rem;justify-content:center;">
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted2);"><div style="width:12px;height:3px;background:rgba(139,92,246,.8);border-radius:2px;"></div><span data-en="Your skills" data-ta="உங்கள் திறன்கள்">Your skills</span></div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted2);"><div style="width:12px;height:3px;background:rgba(6,182,212,.8);border-radius:2px;"></div><span data-en="Job requirements" data-ta="வேலை தேவைகள்">Job requirements</span></div>
+        </div>
+      </div>
+
+      <!-- SKILL BREAKDOWN -->
+      <div>
+        <div class="card">
+          <div class="card-head"><div class="card-head-title" id="breakdownTitle" data-en="Skill Breakdown" data-ta="திறன் பிரிப்பு">Skill Breakdown</div></div>
+          <div class="card-body" id="skillBreakdown"></div>
+        </div>
+        <div class="card" style="margin-top:14px;">
+          <div class="card-head"><div class="card-head-title" data-en="AI Recommendation" data-ta="AI பரிந்துரை">AI Recommendation</div></div>
+          <div class="card-body">
+            <p style="font-size:13px;color:var(--muted2);line-height:1.6;" id="aiRec">Learn TypeScript next — it fills your biggest gap and takes ~3 weeks with 1hr/day practice. Resources: TypeScript official docs, freeCodeCamp TypeScript course (free).</p>
+            <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;" id="learningLinks">
+              <a href="#" style="font-size:11px;color:var(--purple);background:var(--purple-dim);border:1px solid rgba(139,92,246,.2);padding:4px 12px;border-radius:20px;text-decoration:none;">freeCodeCamp →</a>
+              <a href="#" style="font-size:11px;color:var(--cyan);background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.2);padding:4px 12px;border-radius:20px;text-decoration:none;">Official Docs →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</div>
+
+<!-- CHATBOT -->
+<div id="chatBot" style="position:fixed;bottom:24px;right:24px;z-index:9999;">
+  <div id="chatWindow" style="display:none;width:320px;background:#0E0F14;border:1px solid rgba(139,92,246,.3);border-radius:16px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.4);margin-bottom:12px;">
+    <div style="background:linear-gradient(135deg,#8B5CF6,#06B6D4);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;"><div><div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:#fff;">AI Career Advisor</div><div style="font-size:11px;color:rgba(255,255,255,.8);">Ask me anything</div></div><button onclick="toggleChat()" style="background:none;border:none;color:#fff;font-size:18px;cursor:pointer;">✕</button></div>
+    <div id="chatMessages" style="height:260px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px;"></div>
+    <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:8px;"><input id="chatInput" type="text" placeholder="Ask about skills..." style="flex:1;background:#141720;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 12px;color:#EEF0F5;font-size:13px;outline:none;font-family:'DM Sans',sans-serif;" onkeypress="if(event.key==='Enter')sendChat()"/><button onclick="sendChat()" style="background:#8B5CF6;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;font-weight:600;">→</button></div>
+  </div>
+  <button onclick="toggleChat()" style="width:56px;height:56px;background:linear-gradient(135deg,#8B5CF6,#06B6D4);border:none;border-radius:50%;font-size:22px;cursor:pointer;box-shadow:0 4px 20px rgba(139,92,246,.5);display:flex;align-items:center;justify-content:center;margin-left:auto;">💬</button>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="../js/global.js"></script>
+<script src="../js/chatbot.js"></script>
+<script src="../js/lang.js"></script>
+<script>
+const roles={
+  frontend:{label:'Frontend Developer',skills:['React.js','TypeScript','CSS/Tailwind','Git','Node.js','Testing'],yours:[85,45,80,75,30,40],required:[90,80,85,80,65,70],rec:'Learn TypeScript next — it fills your biggest gap and takes ~3 weeks with 1hr/day practice.',links:[{n:'freeCodeCamp →',c:'purple'},{n:'Official Docs →',c:'cyan'}]},
+  data:{label:'Data Analyst',skills:['SQL','Python','Excel','Power BI','Statistics','Tableau'],yours:[70,60,85,30,50,20],required:[90,75,80,80,85,70],rec:'Focus on Power BI and Tableau — these are the most in-demand visualization tools for DA roles in India.',links:[{n:'Power BI Learn →',c:'purple'},{n:'Tableau Public →',c:'cyan'}]},
+  ai:{label:'AI/ML Engineer',skills:['Python','ML/DL','Mathematics','NLP','PyTorch','Cloud/AWS'],yours:[75,50,60,30,20,25],required:[95,90,85,80,85,70],rec:'Strengthen PyTorch and NLP — enroll in fast.ai (free) which covers both in a practical way.',links:[{n:'fast.ai (free) →',c:'purple'},{n:'Kaggle Courses →',c:'cyan'}]},
+  fullstack:{label:'Full Stack Dev',skills:['React','Node.js','MongoDB','REST APIs','Git','Docker'],yours:[85,55,60,70,75,20],required:[85,80,75,85,80,65],rec:'Learn Docker basics — it takes only 2 weeks and is now required in 70% of full stack job descriptions.',links:[{n:'Docker Docs →',c:'purple'},{n:'Play with Docker →',c:'cyan'}]},
+  design:{label:'UI/UX Designer',skills:['Figma','User Research','Prototyping','CSS basics','Accessibility','Design Systems'],yours:[80,50,70,60,30,40],required:[95,85,90,60,75,85],rec:'Build a strong portfolio with 3-4 case studies. User research and design systems are your biggest gaps.',links:[{n:'Figma Learn →',c:'purple'},{n:'Nielsen Norman →',c:'cyan'}]},
+};
+
+let radarChart=null;
+function setRole(key,btn){
+  document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const r=roles[key];
+  document.getElementById('roleLabel').textContent=r.label;
+  document.getElementById('aiRec').textContent=r.rec;
+  const ll=document.getElementById('learningLinks');
+  ll.innerHTML=r.links.map(l=>`<a href="#" style="font-size:11px;color:var(--${l.c});background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);padding:4px 12px;border-radius:20px;text-decoration:none;">${l.n}</a>`).join('');
+  if(radarChart){
+    radarChart.data.labels=r.skills;
+    radarChart.data.datasets[0].data=r.yours;
+    radarChart.data.datasets[1].data=r.required;
+    radarChart.update();
+  }
+  renderBreakdown(r);
+}
+
+function renderBreakdown(r){
+  const el=document.getElementById('skillBreakdown');
+  el.innerHTML=r.skills.map((s,i)=>{
+    const you=r.yours[i],req=r.required[i],gap=req-you;
+    const color=gap>30?'var(--red)':gap>15?'var(--amber)':'var(--green)';
+    const label=gap>30?'Gap':gap>15?'Partial':'Strong';
+    return `<div class="skill-legend-item">
+      <div class="sli-dot" style="background:${color};"></div>
+      <div style="font-size:12px;font-weight:500;width:90px;flex-shrink:0;">${s}</div>
+      <div class="sli-bar"><div class="sli-fill" style="width:${you}%;background:${color};"></div></div>
+      <div class="gap-badge" style="background:${color}22;color:${color};border:1px solid ${color}44;">${label}</div>
+    </div>`;
+  }).join('');
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  const r=roles.frontend;
+  const ctx=document.getElementById('radarChart').getContext('2d');
+  radarChart=new Chart(ctx,{
+    type:'radar',
+    data:{
+      labels:r.skills,
+      datasets:[
+        {label:'Your skills',data:r.yours,backgroundColor:'rgba(139,92,246,.15)',borderColor:'rgba(139,92,246,.8)',borderWidth:2,pointBackgroundColor:'rgba(139,92,246,.8)',pointRadius:4},
+        {label:'Job requirements',data:r.required,backgroundColor:'rgba(6,182,212,.1)',borderColor:'rgba(6,182,212,.7)',borderWidth:2,pointBackgroundColor:'rgba(6,182,212,.7)',pointRadius:4,borderDash:[5,3]}
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:true,
+      scales:{r:{beginAtZero:true,max:100,ticks:{display:false},grid:{color:'rgba(255,255,255,.08)'},pointLabels:{color:'#9898B8',font:{size:11,family:'DM Sans'}},angleLines:{color:'rgba(255,255,255,.06)'}}},
+      plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(14,15,20,.96)',titleColor:'#EEF0F5',bodyColor:'#9898B8',borderColor:'rgba(255,255,255,.08)',borderWidth:1}}
+    }
+  });
+  renderBreakdown(r);
+});
+</script>
+</body>
+</html>

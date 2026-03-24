@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Career IQ — Create Account</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/global.css"/>
+</head>
+<body>
+<nav class="nav scrolled"><div class="nav-inner">
+  <a href="../index.html" class="nav-logo"><div class="logo-mark">IQ</div><span>Career<strong>IQ</strong></span></a>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="lang-btn" onclick="toggleLang()" id="langBtn">🌐 தமிழ்</button>
+    <div style="font-size:13px;color:var(--muted2);" data-en="Already have an account?" data-ta="கணக்கு உள்ளதா?">Already have an account?</div>
+    <a href="login.html" style="color:var(--purple);font-size:13px;" data-en="Sign in" data-ta="உள்நுழை">Sign in</a>
+  </div>
+</div></nav>
+
+<div class="auth-wrap page-wrapper">
+  <div class="auth-left">
+    <div class="auth-left-bg"></div>
+    <div class="auth-left-content">
+      <div class="auth-brand"><div class="logo-mark">IQ</div>Career<strong>IQ</strong></div>
+      <h2 class="auth-headline"><span data-en="Start your" data-ta="உங்கள்">Start your</span><br/><span class="gradient-text" data-en="AI-powered" data-ta="AI-இயங்கும்">AI-powered</span><br/><span data-en="career today." data-ta="தொழிலை இன்று தொடங்குங்கள்.">career today.</span></h2>
+      <p class="auth-sub" data-en="Join thousands of freshers getting smarter job matches, verified listings, and personalized career guidance — completely free." data-ta="ஆயிரக்கணக்கான புதியவர்களுடன் சேருங்கள் — முற்றிலும் இலவசம்.">Join thousands of freshers getting smarter job matches, verified listings, and personalized career guidance — completely free.</p>
+      <div class="auth-features">
+        <div class="auth-feat"><div class="auth-feat-icon">✓</div><span data-en="AI-powered verified job matching" data-ta="AI-இயங்கும் சரிபார்க்கப்பட்ட வேலை பொருத்தம்">AI-powered verified job matching</span></div>
+        <div class="auth-feat"><div class="auth-feat-icon">✓</div><span data-en="Voice search in English & Tamil" data-ta="ஆங்கிலம் மற்றும் தமிழில் குரல் தேடல்">Voice search in English & Tamil</span></div>
+        <div class="auth-feat"><div class="auth-feat-icon">✓</div><span data-en="Mock interview AI scoring" data-ta="போலி நேர்காணல் AI மதிப்பீடு">Mock interview AI scoring</span></div>
+        <div class="auth-feat"><div class="auth-feat-icon">✓</div><span data-en="Skill gap radar chart" data-ta="திறன் இடைவெளி ரேடார் விளக்கப்படம்">Skill gap radar chart</span></div>
+        <div class="auth-feat"><div class="auth-feat-icon">✓</div><span data-en="24/7 AI career advisor chat" data-ta="24/7 AI தொழில் ஆலோசகர் அரட்டை">24/7 AI career advisor chat</span></div>
+      </div>
+    </div>
+    <div class="auth-pulse"></div>
+  </div>
+  <div class="auth-right">
+    <div class="auth-form-box">
+      <div class="auth-form-title" data-en="Create your account" data-ta="உங்கள் கணக்கை உருவாக்கவும்">Create your account</div>
+      <div class="auth-form-sub"><span data-en="Already registered?" data-ta="ஏற்கனவே பதிவு செய்தீர்களா?">Already registered?</span> <a href="login.html" data-en="Sign in here" data-ta="இங்கே உள்நுழையுங்கள்">Sign in here</a></div>
+
+      <form onsubmit="handleRegister(event)">
+        <!-- FIXED: Only "Name" field — no last name, no personal info exposed -->
+        <div class="form-group">
+          <label class="form-label" data-en="Your name" data-ta="உங்கள் பெயர்">Your name</label>
+          <input id="reg-name" class="form-input" type="text" placeholder="Enter your name" required data-ph-en="Enter your name" data-ph-ta="உங்கள் பெயரை உள்ளிடவும்"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-en="Email address" data-ta="மின்னஞ்சல் முகவரி">Email address</label>
+          <input id="reg-email" class="form-input" type="email" placeholder="you@example.com" required data-ph-en="you@example.com" data-ph-ta="நீங்கள்@example.com"/>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" data-en="I am a" data-ta="நான் ஒரு">I am a</label>
+          <div class="role-grid">
+            <div class="role-card selected" onclick="selectRole(this,'fresher')"><div class="role-card-icon">🎓</div><div class="role-card-name" data-en="Fresher" data-ta="புதியவர்">Fresher</div></div>
+            <div class="role-card" onclick="selectRole(this,'student')"><div class="role-card-icon">📚</div><div class="role-card-name" data-en="Student" data-ta="மாணவர்">Student</div></div>
+            <div class="role-card" onclick="selectRole(this,'mentor')"><div class="role-card-icon">🧑‍🏫</div><div class="role-card-name" data-en="Mentor" data-ta="வழிகாட்டி">Mentor</div></div>
+            <div class="role-card" onclick="selectRole(this,'recruiter')"><div class="role-card-icon">🏢</div><div class="role-card-name" data-en="Recruiter" data-ta="ஆட்சேர்ப்பாளர்">Recruiter</div></div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" data-en="Password" data-ta="கடவுச்சொல்">Password</label>
+          <input id="reg-pass" class="form-input" type="password" placeholder="Min. 8 characters" required data-ph-en="Min. 8 characters" data-ph-ta="குறைந்தது 8 எழுத்துக்கள்"/>
+        </div>
+        <button type="submit" class="submit-btn" id="regBtn" data-en="Create free account →" data-ta="இலவச கணக்கு உருவாக்கு →">Create free account →</button>
+      </form>
+      <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:1.25rem;line-height:1.6;">
+        <span data-en="By registering you agree to our" data-ta="பதிவு செய்வதன் மூலம் நீங்கள் எங்கள்">By registering you agree to our</span>
+        <a href="#" style="color:var(--purple);" data-en="Terms" data-ta="விதிமுறைகளுக்கு">Terms</a>
+        <span data-en="and" data-ta="மற்றும்">and</span>
+        <a href="#" style="color:var(--purple);" data-en="Privacy Policy" data-ta="தனியுரிமைக் கொள்கைக்கு">Privacy Policy</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="../js/global.js"></script>
+<script src="../js/lang.js"></script>
+<script>
+let selectedRole='fresher';
+function selectRole(card,role){document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('selected'));card.classList.add('selected');selectedRole=role;}
+function handleRegister(e){
+  e.preventDefault();
+  const name=document.getElementById('reg-name').value.trim();
+  const email=document.getElementById('reg-email').value.trim();
+  const pass=document.getElementById('reg-pass').value;
+  const btn=document.getElementById('regBtn');
+  if(!name||!email||!pass)return showToast('Please fill in all fields','error');
+  if(pass.length<8)return showToast('Password must be at least 8 characters','error');
+  btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Creating account...';
+  setTimeout(()=>{
+    localStorage.setItem('ciq_user',JSON.stringify({name,email,role:selectedRole}));
+    showToast('Account created! Welcome to Career IQ 🎉','success');
+    setTimeout(()=>window.location.href='dashboard.html',1200);
+  },1500);
+}
+</script>
+</body>
+</html>

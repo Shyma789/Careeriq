@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Career IQ — Resume Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/global.css"/>
+<style>
+.upload-zone{background:var(--surface2);border:2px dashed var(--border2);border-radius:14px;padding:2.5rem;text-align:center;cursor:pointer;transition:all .2s;}
+.upload-zone:hover{border-color:var(--purple);background:var(--purple-dim);}
+.ats-bar{margin-bottom:14px;}
+.ats-bar-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;}
+.ats-track{height:6px;background:var(--surface3);border-radius:3px;overflow:hidden;}
+.ats-fill{height:100%;border-radius:3px;transition:width 1.2s ease;}
+</style>
+</head>
+<body>
+<nav class="nav scrolled"><div class="nav-inner">
+  <a href="../index.html" class="nav-logo"><div class="logo-mark">IQ</div><span>Career<strong>IQ</strong></span></a>
+  <div class="nav-links"><a href="dashboard.html" class="nav-link">Dashboard</a><a href="jobs.html" class="nav-link">Jobs</a><a href="resume.html" class="nav-link active">Resume</a><a href="mentor.html" class="nav-link">Mentors</a></div>
+  <div style="display:flex;align-items:center;gap:10px;"><button class="lang-btn" onclick="toggleLang()" id="langBtn">🌐 தமிழ்</button><a href="dashboard.html" class="btn-ghost">← Back</a></div>
+</div></nav>
+
+<div class="page-wrapper">
+<div class="dash-layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-mark" style="width:26px;height:26px;font-size:11px;">IQ</div>Career<strong>IQ</strong></div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span>Dashboard</a>
+      <a href="jobs.html" class="sidebar-link"><span class="sidebar-link-icon">🔍</span>Job Search</a>
+      <a href="skillgap.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span>Skill Gap Radar</a>
+      <a href="interview.html" class="sidebar-link"><span class="sidebar-link-icon">🧪</span>Mock Interview</a>
+      <a href="resume.html" class="sidebar-link active"><span class="sidebar-link-icon">📄</span>Resume Builder</a>
+      <a href="mentor.html" class="sidebar-link"><span class="sidebar-link-icon">👥</span>Mentors</a>
+    </nav>
+  </aside>
+  <main class="dash-content">
+    <div class="dash-header"><h1 data-en="Smart Resume Builder" data-ta="ஸ்மார்ட் ரெஸ்யூம் தயாரிப்பு">📄 Smart Resume Builder</h1><p data-en="AI-powered resume scoring with real ATS optimization suggestions." data-ta="நிஜமான ATS தேர்வு பரிந்துரைகளுடன் AI-இயங்கும் ரெஸ்யூம் மதிப்பீடு.">AI-powered resume scoring with real ATS optimization suggestions.</p></div>
+    <div style="display:grid;grid-template-columns:1fr 340px;gap:20px;">
+      <div>
+        <div class="card" style="margin-bottom:20px;"><div class="card-head"><div class="card-head-title" data-en="Upload Existing Resume" data-ta="இருக்கும் ரெஸ்யூமை பதிவேற்றவும்">Upload Existing Resume</div></div>
+          <div class="card-body"><div class="upload-zone" onclick="document.getElementById('rFile').click()"><div style="font-size:32px;margin-bottom:.75rem;">📄</div><div style="font-size:15px;font-weight:500;margin-bottom:4px;" data-en="Drop your resume here" data-ta="உங்கள் ரெஸ்யூமை இங்கே இழுத்து விடவும்">Drop your resume here</div><div style="font-size:13px;color:var(--muted2);" data-en="PDF or DOCX · AI will score it instantly" data-ta="PDF அல்லது DOCX · AI உடனடியாக மதிப்பிடும்">PDF or DOCX · AI will score it instantly</div><input type="file" id="rFile" accept=".pdf,.docx" style="display:none;" onchange="analyzeResume(this)"/></div></div>
+        </div>
+        <div class="card" style="margin-bottom:20px;"><div class="card-head"><div class="card-head-title" data-en="Personal Information" data-ta="தனிப்பட்ட தகவல்">Personal Information</div></div>
+          <div class="card-body">
+            <div class="form-group"><label class="form-label" data-en="Name" data-ta="பெயர்">Name</label><input class="form-input" type="text" placeholder="Your name" data-ph-en="Your name" data-ph-ta="உங்கள் பெயர்" oninput="updateScore()"/></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div class="form-group"><label class="form-label" data-en="Email" data-ta="மின்னஞ்சல்">Email</label><input class="form-input" type="email" placeholder="you@example.com" oninput="updateScore()"/></div>
+              <div class="form-group"><label class="form-label" data-en="Phone" data-ta="தொலைபேசி">Phone</label><input class="form-input" type="tel" placeholder="+91 98765 43210" oninput="updateScore()"/></div>
+            </div>
+            <div class="form-group"><label class="form-label" data-en="Professional Summary" data-ta="தொழில்முறை சுருக்கம்">Professional Summary</label><textarea class="form-input" rows="3" placeholder="Brief professional summary highlighting your key skills..." oninput="updateScore()" style="resize:vertical;"></textarea></div>
+            <div class="form-group"><label class="form-label" data-en="Technical Skills" data-ta="தொழில்நுட்ப திறன்கள்">Technical Skills</label><input class="form-input" type="text" placeholder="React, JavaScript, Python, SQL..." oninput="updateScore()"/></div>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;">
+          <button class="btn-primary" onclick="showToast('Generating PDF resume...','');setTimeout(()=>showToast('Resume downloaded!','success'),1500);" data-en="⬇ Download PDF" data-ta="⬇ PDF பதிவிறக்கு">⬇ Download PDF</button>
+          <button class="btn-ghost" onclick="showToast('Resume saved!','success')" data-en="Save draft" data-ta="வரைவு சேமி">Save draft</button>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:14px;"><div class="card-head"><div class="card-head-title" data-en="ATS Score" data-ta="ATS மதிப்பெண்">ATS Score</div></div>
+          <div class="card-body" style="text-align:center;">
+            <div style="font-family:var(--font-head);font-size:64px;font-weight:800;background:linear-gradient(135deg,#8B5CF6,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;" id="scoreDisplay">75</div>
+            <div style="font-size:13px;color:var(--muted2);margin-bottom:1.5rem;" data-en="/ 100 — Good" data-ta="/ 100 — நல்லது">/ 100 — Good</div>
+            <div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--muted2);"><div style="width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;"></div><span data-en="Add quantified achievements" data-ta="அளவிடப்பட்ட சாதனைகளைச் சேர்க்கவும்">Add quantified achievements</span></div>
+            <div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--muted2);"><div style="width:8px;height:8px;border-radius:50%;background:var(--amber);flex-shrink:0;"></div><span data-en="Include LinkedIn profile URL" data-ta="LinkedIn சுயவிவர URL சேர்க்கவும்">Include LinkedIn profile URL</span></div>
+            <div style="display:flex;align-items:center;gap:8px;padding:8px 0;font-size:12px;color:var(--muted2);"><div style="width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;"></div><span data-en="Skills section looks good" data-ta="திறன்கள் பகுதி நன்றாக உள்ளது">Skills section looks good</span></div>
+          </div>
+        </div>
+        <div class="card"><div class="card-head"><div class="card-head-title" data-en="Keyword Match" data-ta="முக்கிய வார்த்தை பொருத்தம்">Keyword Match</div></div>
+          <div class="card-body">
+            <p style="font-size:12px;color:var(--muted2);margin-bottom:1rem;" data-en="vs Frontend Developer listings" data-ta="ஃப்ரண்டெண்ட் டெவலப்பர் பட்டியல்களுக்கு எதிராக">vs Frontend Developer listings</p>
+            <div class="ats-bar"><div class="ats-bar-label"><span style="font-size:12px;">React.js</span><span style="font-size:11px;color:var(--green);" data-en="Found" data-ta="கண்டுபிடிக்கப்பட்டது">Found</span></div><div class="ats-track"><div class="ats-fill" style="width:90%;background:var(--green);"></div></div></div>
+            <div class="ats-bar"><div class="ats-bar-label"><span style="font-size:12px;">TypeScript</span><span style="font-size:11px;color:var(--amber);" data-en="Partial" data-ta="பகுதி">Partial</span></div><div class="ats-track"><div class="ats-fill" style="width:55%;background:var(--amber);"></div></div></div>
+            <div class="ats-bar"><div class="ats-bar-label"><span style="font-size:12px;">Node.js</span><span style="font-size:11px;color:var(--red);" data-en="Missing" data-ta="இல்லை">Missing</span></div><div class="ats-track"><div class="ats-fill" style="width:10%;background:var(--red);"></div></div></div>
+            <div class="ats-bar"><div class="ats-bar-label"><span style="font-size:12px;">Git / GitHub</span><span style="font-size:11px;color:var(--green);" data-en="Found" data-ta="கண்டுபிடிக்கப்பட்டது">Found</span></div><div class="ats-track"><div class="ats-fill" style="width:85%;background:var(--green);"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</div>
+<!-- CHATBOT -->
+<div id="chatBot" style="position:fixed;bottom:24px;right:24px;z-index:9999;">
+  <div id="chatWindow" style="display:none;width:320px;background:#0E0F14;border:1px solid rgba(139,92,246,.3);border-radius:16px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.4);margin-bottom:12px;"><div style="background:linear-gradient(135deg,#8B5CF6,#06B6D4);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;"><div><div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:#fff;">AI Career Advisor</div><div style="font-size:11px;color:rgba(255,255,255,.8);">Resume tips</div></div><button onclick="toggleChat()" style="background:none;border:none;color:#fff;font-size:18px;cursor:pointer;">✕</button></div><div id="chatMessages" style="height:260px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px;"></div><div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:8px;"><input id="chatInput" type="text" placeholder="Ask resume tips..." style="flex:1;background:#141720;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 12px;color:#EEF0F5;font-size:13px;outline:none;font-family:'DM Sans',sans-serif;" onkeypress="if(event.key==='Enter')sendChat()"/><button onclick="sendChat()" style="background:#8B5CF6;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;font-weight:600;">→</button></div></div>
+  <button onclick="toggleChat()" style="width:56px;height:56px;background:linear-gradient(135deg,#8B5CF6,#06B6D4);border:none;border-radius:50%;font-size:22px;cursor:pointer;box-shadow:0 4px 20px rgba(139,92,246,.5);display:flex;align-items:center;justify-content:center;margin-left:auto;">💬</button>
+</div>
+<div class="toast" id="toast"></div>
+<script src="../js/global.js"></script>
+<script src="../js/chatbot.js"></script>
+<script src="../js/lang.js"></script>
+<script>
+let baseScore=75;
+function updateScore(){const inputs=document.querySelectorAll('.form-input');let filled=0;inputs.forEach(i=>{if(i.value.trim())filled++;});document.getElementById('scoreDisplay').textContent=Math.min(98,baseScore+Math.floor(filled*1.8));}
+function analyzeResume(input){if(input.files[0]){showToast(`Analyzing "${input.files[0].name}"...`,'');setTimeout(()=>{baseScore=82;document.getElementById('scoreDisplay').textContent=82;showToast('Resume analyzed! Score updated.','success');},2000);}}
+</script>
+</body>
+</html>

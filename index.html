@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Career IQ — AI-Powered Career Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/global.css"/>
+<link rel="stylesheet" href="css/landing.css"/>
+</head>
+<body>
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="logo-mark">IQ</div><span>Career<strong>IQ</strong></span></a>
+    <div class="nav-links">
+      <a href="#features" class="nav-link" data-en="Features" data-ta="அம்சங்கள்">Features</a>
+      <a href="#how" class="nav-link" data-en="How it works" data-ta="எப்படி வேலை செய்கிறது">How it works</a>
+      <a href="#impact" class="nav-link" data-en="Impact" data-ta="தாக்கம்">Impact</a>
+    </div>
+    <div class="nav-actions">
+      <button class="lang-btn" onclick="toggleLang()" id="langBtn" title="Switch Language">🌐 தமிழ்</button>
+      <a href="pages/login.html" class="btn-ghost" data-en="Sign in" data-ta="உள்நுழை">Sign in</a>
+      <a href="pages/register.html" class="btn-primary" data-en="Get started free" data-ta="இலவசமாக தொடங்கு">Get started free</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div><div class="grid-overlay"></div></div>
+  <div class="hero-content">
+    <div class="hero-badge fade-up"><span class="badge-dot"></span><span data-en="AI Automation & Emerging Technology" data-ta="AI தன்னியக்கம் & வளர்ந்து வரும் தொழில்நுட்பம்">AI Automation & Emerging Technology</span></div>
+    <h1 class="hero-title fade-up delay-1" data-en="Your AI Career<br/>Intelligence<br/>Partner" data-ta="உங்கள் AI தொழில்<br/>புத்திசாலி<br/>கூட்டாளி">Your AI Career<br/><span class="gradient-text">Intelligence</span><br/>Partner</h1>
+    <p class="hero-sub fade-up delay-2" data-en="Career IQ combines NLP, machine learning, and fraud detection to deliver verified job matches, smart resume scoring, mentor connections, and real-time career guidance built for freshers." data-ta="Career IQ என்பது NLP, machine learning மற்றும் மோசடி கண்டறிதலை இணைத்து, சரிபார்க்கப்பட்ட வேலை பொருத்தங்கள், ஸ்மார்ட் ரெஸ்யூம் மதிப்பெண், வழிகாட்டி இணைப்புகள் மற்றும் நிகழ்நேர தொழில் வழிகாட்டுதலை வழங்குகிறது.">Career IQ combines NLP, machine learning, and fraud detection to deliver verified job matches, smart resume scoring, mentor connections, and real-time career guidance built for freshers.</p>
+    <div class="hero-actions fade-up delay-3">
+      <a href="pages/register.html" class="btn-primary btn-lg" data-en="⚡ Start for free" data-ta="⚡ இலவசமாக தொடங்கு">⚡ Start for free</a>
+      <a href="#how" class="btn-outline btn-lg" data-en="See how it works" data-ta="எப்படி வேலை செய்கிறது">See how it works</a>
+    </div>
+    <div class="hero-stats fade-up delay-4">
+      <div class="hs"><div class="hs-num" id="s1">0<span>%</span></div><div class="hs-lbl" data-en="Fraud detection rate" data-ta="மோசடி கண்டறிதல் விகிதம்">Fraud detection rate</div></div>
+      <div style="width:1px;height:40px;background:rgba(255,255,255,0.1);"></div>
+      <div class="hs"><div class="hs-num" id="s2">0<span>x</span></div><div class="hs-lbl" data-en="Faster job matches" data-ta="விரைவான வேலை பொருத்தங்கள்">Faster job matches</div></div>
+      <div style="width:1px;height:40px;background:rgba(255,255,255,0.1);"></div>
+      <div class="hs"><div class="hs-num" id="s3">0<span>+</span></div><div class="hs-lbl" data-en="Verified listings" data-ta="சரிபார்க்கப்பட்ட பட்டியல்கள்">Verified listings</div></div>
+    </div>
+  </div>
+  <div class="hero-card fade-up delay-3">
+    <div class="card-header"><div class="card-dots"><span style="background:#FF5F57"></span><span style="background:#FFBD2E"></span><span style="background:#28CA41"></span></div><div class="card-title-text" data-en="AI Match Score" data-ta="AI பொருத்தம் மதிப்பெண்">AI Match Score</div></div>
+    <div class="match-visual">
+      <svg class="ring-svg" viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" fill="none" stroke="rgba(139,92,246,0.12)" stroke-width="8"/><circle cx="60" cy="60" r="50" fill="none" stroke="url(#rg)" stroke-width="8" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="47" transform="rotate(-90 60 60)" class="ring-progress"/><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8B5CF6"/><stop offset="100%" stop-color="#06B6D4"/></linearGradient></defs></svg>
+      <div class="ring-label"><span class="ring-num">85</span><span>%</span></div>
+    </div>
+    <div class="match-info"><div class="match-role" data-en="Senior UI Developer" data-ta="மூத்த UI டெவலப்பர்">Senior UI Developer</div><div class="match-company">TechCorp India · <span style="color:#10B981;">✓ Verified</span></div></div>
+    <div class="match-skills"><span class="skill-chip">React</span><span class="skill-chip">Figma</span><span class="skill-chip skill-gap" data-en="+2 skills needed" data-ta="+2 திறன்கள் தேவை">+2 skills needed</span></div>
+    <div class="card-pulse"></div>
+  </div>
+</section>
+
+<section class="problems" id="problems">
+  <div class="container">
+    <div class="section-tag reveal" data-en="The Problem" data-ta="பிரச்சனை">The Problem</div>
+    <h2 class="section-title reveal" data-en="Fresh graduates are navigating blind." data-ta="புதிய பட்டதாரிகள் கண்மூடித்தனமாக வழிசெலுத்துகின்றனர்.">Fresh graduates are navigating blind.</h2>
+    <div class="problems-grid reveal">
+      <div class="prob-card"><div class="prob-icon red">⚠</div><div class="prob-stat">High</div><p data-en="Fraud job postings targeting freshers with no verification" data-ta="சரிபார்ப்பு இல்லாமல் புதியவர்களை இலக்காகக் கொண்ட மோசடி வேலை இடுகைகள்">Fraud job postings targeting freshers with no verification</p></div>
+      <div class="prob-card"><div class="prob-icon amber">✗</div><div class="prob-stat">Zero</div><p data-en="Skill-based personalized recommendations on existing platforms" data-ta="தற்போதுள்ள தளங்களில் திறன் அடிப்படையிலான தனிப்பயனாக்கப்பட்ட பரிந்துரைகள்">Skill-based personalized recommendations on existing platforms</p></div>
+      <div class="prob-card"><div class="prob-icon purple">✗</div><div class="prob-stat">Lacking</div><p data-en="Resume scoring, ATS optimization, and improvement guidance" data-ta="ரெஸ்யூம் மதிப்பீடு, ATS தேர்வு மற்றும் மேம்பாட்டு வழிகாட்டுதல்">Resume scoring, ATS optimization, and improvement guidance</p></div>
+      <div class="prob-card"><div class="prob-icon cyan">✗</div><div class="prob-stat">None</div><p data-en="Integrated platform for verified jobs, mentorship, and automation" data-ta="சரிபார்க்கப்பட்ட வேலைகள், வழிகாட்டுதல் மற்றும் தன்னியக்கத்திற்கான ஒருங்கிணைந்த தளம்">Integrated platform for verified jobs, mentorship, and automation</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="features sec-dark" id="features">
+  <div class="container">
+    <div class="section-tag reveal" data-en="Core Features" data-ta="முக்கிய அம்சங்கள்">Core Features</div>
+    <h2 class="section-title reveal" data-en="Everything you need. Nothing you don't." data-ta="உங்களுக்கு தேவையான அனைத்தும். தேவையில்லாதது எதுவும் இல்லை.">Everything you need. Nothing you don't.</h2>
+    <div class="features-grid">
+      <div class="feat-card feat-large reveal"><div class="feat-icon-wrap">🤖</div><h3 data-en="AI Job Matching" data-ta="AI வேலை பொருத்தம்">AI Job Matching</h3><p data-en="NLP-powered recommendation engine analyzes your skills and behavior to surface the most relevant verified opportunities with a personalized match score." data-ta="NLP-இயங்கும் பரிந்துரை இயந்திரம் உங்கள் திறன்கள் மற்றும் நடத்தையை பகுப்பாய்வு செய்கிறது.">NLP-powered recommendation engine analyzes your skills and behavior to surface the most relevant verified opportunities with a personalized match score.</p><div class="feat-tag" data-en="Core feature" data-ta="முக்கிய அம்சம்">Core feature</div></div>
+      <div class="feat-card reveal"><div class="feat-icon-wrap">🛡</div><h3 data-en="Fraud Detection AI" data-ta="மோசடி கண்டறிதல் AI">Fraud Detection AI</h3><p data-en="ML algorithms scan every listing for suspicious patterns and fake companies before they reach you." data-ta="ML வழிமுறைகள் ஒவ்வொரு பட்டியலையும் சந்தேகத்திற்கிடமான வடிவங்களுக்காக ஸ்கேன் செய்கின்றன.">ML algorithms scan every listing for suspicious patterns before they reach you.</p><div class="feat-tag">Security</div></div>
+      <div class="feat-card reveal"><div class="feat-icon-wrap">🎤</div><h3 data-en="Voice Job Search" data-ta="குரல் வேலை தேடல்">Voice Job Search</h3><p data-en="Speak your search query naturally in English or Tamil. Our voice AI understands intent, not just keywords." data-ta="ஆங்கிலம் அல்லது தமிழில் இயல்பாக பேசுங்கள். எங்கள் குரல் AI உங்கள் நோக்கத்தை புரிந்துகொள்கிறது.">Speak your query in English or Tamil. AI understands intent, not just keywords.</p><div class="feat-tag" data-en="NLP + Tamil" data-ta="NLP + தமிழ்">NLP + Tamil</div></div>
+      <div class="feat-card reveal"><div class="feat-icon-wrap">📊</div><h3 data-en="Skill Gap Radar" data-ta="திறன் இடைவெளி ரேடார்">Skill Gap Radar</h3><p data-en="Animated radar chart shows exactly which skills you have vs what your target job needs." data-ta="அனிமேட்டட் ரேடார் விளக்கப்படம் உங்களுக்கு உள்ள திறன்களை காட்டுகிறது.">Animated radar chart shows exactly which skills you have vs what your target job needs.</p><div class="feat-tag" data-en="Visual AI" data-ta="காட்சி AI">Visual AI</div></div>
+      <div class="feat-card reveal"><div class="feat-icon-wrap">🧪</div><h3 data-en="Mock Interview AI" data-ta="போலி நேர்காணல் AI">Mock Interview AI</h3><p data-en="Practice real interview questions for your target role. AI scores your answers and gives instant feedback." data-ta="உங்கள் இலக்கு பங்கிற்கான நிஜமான நேர்காணல் கேள்விகளை பயிற்சி செய்யுங்கள்.">Practice real interview questions for your role. AI scores your answers instantly.</p><div class="feat-tag" data-en="AI scoring" data-ta="AI மதிப்பீடு">AI scoring</div></div>
+      <div class="feat-card reveal"><div class="feat-icon-wrap">💬</div><h3 data-en="AI Career Advisor" data-ta="AI தொழில் ஆலோசகர்">AI Career Advisor</h3><p data-en="Chat with our AI career advisor anytime. Ask about skills, salaries, career paths — get instant personalized answers." data-ta="எங்கள் AI தொழில் ஆலோசகருடன் எப்போது வேண்டுமானாலும் அரட்டையடிக்கவும்.">Chat with our AI advisor anytime. Ask about skills, salaries, career paths.</p><div class="feat-tag" data-en="24/7 AI" data-ta="24/7 AI">24/7 AI</div></div>
+      <div class="feat-card reveal"><div class="feat-icon-wrap">👥</div><h3 data-en="Mentor Connect" data-ta="வழிகாட்டி இணைப்பு">Mentor Connect</h3><p data-en="Get matched with industry professionals for 1-on-1 guidance and career roadmap reviews." data-ta="1-on-1 வழிகாட்டுதலுக்காக தொழில் வல்லுநர்களுடன் இணைக்கப்படுங்கள்.">Get matched with industry professionals for 1-on-1 guidance.</p><div class="feat-tag">Community</div></div>
+      <div class="feat-card reveal"><div class="feat-icon-wrap">📄</div><h3 data-en="Smart Resume Builder" data-ta="ஸ்மார்ட் ரெஸ்யூம் தயாரிப்பு">Smart Resume Builder</h3><p data-en="AI evaluates your resume against real ATS systems, scores it, and gives actionable optimization suggestions." data-ta="AI உங்கள் ரெஸ்யூமை மதிப்பிட்டு மேம்பாட்டு பரிந்துரைகளை வழங்குகிறது.">AI evaluates your resume, scores it, and gives optimization suggestions.</p><div class="feat-tag">AI-powered</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="how-sec" id="how">
+  <div class="container">
+    <div class="section-tag reveal" data-en="How it works" data-ta="எப்படி வேலை செய்கிறது">How it works</div>
+    <h2 class="section-title reveal" data-en="Three layers. Infinite intelligence." data-ta="மூன்று அடுக்குகள். முடிவற்ற நுண்ணறிவு.">Three layers. Infinite intelligence.</h2>
+    <div class="layers reveal">
+      <div class="layer-card"><div class="layer-num">01</div><h3 data-en="Input Layer" data-ta="உள்ளீட்டு அடுக்கு">Input Layer</h3><p data-en="Upload resume, add skills, set career interests, or use voice queries in English or Tamil." data-ta="ரெஸ்யூம் பதிவேற்றம், திறன்கள் சேர்க்கை, அல்லது ஆங்கிலம்/தமிழில் குரல் வினவல்கள் பயன்படுத்தவும்.">Upload resume, add skills, or use voice queries in English or Tamil.</p><div class="layer-pills"><span data-en="Resume upload" data-ta="ரெஸ்யூம் பதிவேற்றம்">Resume upload</span><span data-en="Voice search" data-ta="குரல் தேடல்">Voice search</span><span data-en="Skills profiling" data-ta="திறன் சுயவிவரம்">Skills profiling</span></div></div>
+      <div class="layer-arrow">→</div>
+      <div class="layer-card layer-mid"><div class="layer-num">02</div><h3 data-en="Intelligence Layer" data-ta="நுண்ணறிவு அடுக்கு">Intelligence Layer</h3><p data-en="NLP, ML models, fraud detection, radar analysis, and mock interview AI process everything." data-ta="NLP, ML மாதிரிகள், மோசடி கண்டறிதல், ரேடார் பகுப்பாய்வு மற்றும் போலி நேர்காணல் AI.">NLP, ML models, fraud detection, radar analysis, and mock interview AI process everything.</p><div class="layer-pills"><span>NLP</span><span data-en="ML matching" data-ta="ML பொருத்தம்">ML matching</span><span data-en="Fraud detect" data-ta="மோசடி கண்டறிதல்">Fraud detect</span><span data-en="AI scoring" data-ta="AI மதிப்பீடு">AI scoring</span></div></div>
+      <div class="layer-arrow">→</div>
+      <div class="layer-card"><div class="layer-num">03</div><h3 data-en="Output Layer" data-ta="வெளியீட்டு அடுக்கு">Output Layer</h3><p data-en="Receive verified job matches, resume feedback, interview coaching, skill gap radar, and AI career advice." data-ta="சரிபார்க்கப்பட்ட வேலை பொருத்தங்கள், ரெஸ்யூம் கருத்து, நேர்காணல் பயிற்சி மற்றும் AI தொழில் ஆலோசனை பெறுங்கள்.">Verified jobs, resume feedback, interview coaching, skill gap radar, AI career advice.</p><div class="layer-pills"><span data-en="Verified jobs" data-ta="சரிபார்க்கப்பட்ட வேலைகள்">Verified jobs</span><span data-en="Resume score" data-ta="ரெஸ்யூம் மதிப்பெண்">Resume score</span><span data-en="AI interview" data-ta="AI நேர்காணல்">AI interview</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:6rem 2rem;background:var(--surface);" id="impact">
+  <div class="container">
+    <div class="section-tag reveal" data-en="Our Impact" data-ta="எங்கள் தாக்கம்">Our Impact</div>
+    <h2 class="section-title reveal" data-en="Numbers that matter." data-ta="முக்கியமான எண்கள்.">Numbers that matter.</h2>
+    <div class="impact-grid reveal">
+      <div class="imp-cell"><div class="imp-num" id="cnt1">0</div><div class="imp-lbl" data-en="Incidents resolved" data-ta="தீர்க்கப்பட்ட சம்பவங்கள்">Jobs matched</div></div>
+      <div class="imp-cell"><div class="imp-num" id="cnt2">0</div><div class="imp-lbl" data-en="Volunteers registered" data-ta="பதிவு செய்யப்பட்ட தன்னார்வலர்கள்">Students registered</div></div>
+      <div class="imp-cell"><div class="imp-num" id="cnt3">0<span>%</span></div><div class="imp-lbl" data-en="Resolution rate" data-ta="தீர்வு விகிதம்">Fraud blocked</div></div>
+      <div class="imp-cell"><div class="imp-num" id="cnt4">0<span>+</span></div><div class="imp-lbl" data-en="Avg response time" data-ta="சராசரி பதில் நேரம்">Verified listings</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <div class="container">
+    <h2 class="cta-title reveal" data-en="Ready to find your perfect career match?" data-ta="உங்கள் சரியான தொழில் பொருத்தத்தைக் கண்டுபிடிக்க தயாரா?">Ready to find your<br/><span class="gradient-text">perfect career match?</span></h2>
+    <p class="cta-sub reveal" data-en="Join thousands of freshers getting smarter job matches and AI-powered career guidance." data-ta="ஆயிரக்கணக்கான புதியவர்களுடன் சேருங்கள்.">Join thousands of freshers getting smarter job matches and AI-powered career guidance.</p>
+    <div class="cta-btns reveal">
+      <a href="pages/register.html" class="btn-primary btn-lg" data-en="Create free account" data-ta="இலவச கணக்கு உருவாக்கு">Create free account</a>
+      <a href="pages/dashboard.html" class="btn-ghost btn-lg" data-en="Explore dashboard →" data-ta="டாஷ்போர்டை ஆராய →">Explore dashboard →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand"><a href="index.html" class="nav-logo"><div class="logo-mark">IQ</div><span>Career<strong>IQ</strong></span></a><p data-en="AI-powered career intelligence for the next generation." data-ta="அடுத்த தலைமுறைக்கான AI-இயங்கும் தொழில் நுண்ணறிவு.">AI-powered career intelligence for the next generation.</p><p class="footer-credit">AI Automation & Emerging Technology · Jeppiaar University</p></div>
+      <div class="footer-links-group">
+        <div class="footer-col"><div class="footer-col-title" data-en="Platform" data-ta="தளம்">Platform</div><a href="pages/dashboard.html" data-en="Dashboard" data-ta="டாஷ்போர்டு">Dashboard</a><a href="pages/jobs.html" data-en="Job Search" data-ta="வேலை தேடல்">Job Search</a><a href="pages/resume.html" data-en="Resume Builder" data-ta="ரெஸ்யூம் தயாரிப்பு">Resume Builder</a><a href="pages/mentor.html" data-en="Mentors" data-ta="வழிகாட்டிகள்">Mentors</a></div>
+        <div class="footer-col"><div class="footer-col-title" data-en="Account" data-ta="கணக்கு">Account</div><a href="pages/login.html" data-en="Sign In" data-ta="உள்நுழை">Sign In</a><a href="pages/register.html" data-en="Register" data-ta="பதிவு செய்">Register</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><div>© 2024 Career IQ</div><div data-en="Built for freshers. Powered by AI." data-ta="புதியவர்களுக்காக கட்டப்பட்டது. AI ஆல் இயக்கப்படுகிறது.">Built for freshers. Powered by AI.</div></div>
+  </div>
+</footer>
+
+<!-- AI CHATBOT -->
+<div id="chatBot" style="position:fixed;bottom:24px;right:24px;z-index:9999;">
+  <div id="chatWindow" style="display:none;width:320px;background:#0E0F14;border:1px solid rgba(139,92,246,0.3);border-radius:16px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,0.4);margin-bottom:12px;">
+    <div style="background:linear-gradient(135deg,#8B5CF6,#06B6D4);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;">
+      <div><div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:#fff;" data-en="AI Career Advisor" data-ta="AI தொழில் ஆலோசகர்">AI Career Advisor</div><div style="font-size:11px;color:rgba(255,255,255,0.8);" data-en="Ask me anything about your career" data-ta="உங்கள் தொழில் பற்றி என்னிடம் கேளுங்கள்">Ask me anything about your career</div></div>
+      <button onclick="toggleChat()" style="background:none;border:none;color:#fff;font-size:18px;cursor:pointer;">✕</button>
+    </div>
+    <div id="chatMessages" style="height:260px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px;"></div>
+    <div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,0.08);display:flex;gap:8px;">
+      <input id="chatInput" type="text" placeholder="Ask about careers..." style="flex:1;background:#141720;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;color:#EEF0F5;font-size:13px;outline:none;font-family:'DM Sans',sans-serif;" onkeypress="if(event.key==='Enter')sendChat()"/>
+      <button onclick="sendChat()" style="background:#8B5CF6;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;font-weight:600;">→</button>
+    </div>
+  </div>
+  <button onclick="toggleChat()" style="width:56px;height:56px;background:linear-gradient(135deg,#8B5CF6,#06B6D4);border:none;border-radius:50%;font-size:22px;cursor:pointer;box-shadow:0 4px 20px rgba(139,92,246,0.5);display:flex;align-items:center;justify-content:center;margin-left:auto;" title="AI Career Advisor">💬</button>
+</div>
+
+<script src="js/global.js"></script>
+<script src="js/landing.js"></script>
+<script src="js/chatbot.js"></script>
+<script src="js/lang.js"></script>
+</body>
+</html>

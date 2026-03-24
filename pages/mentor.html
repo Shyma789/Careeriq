@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Career IQ — Mentor Connect</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../css/global.css"/>
+<style>
+.mentor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:1.5rem;}
+.mentor-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem;transition:all .25s;}
+.mentor-card:hover{transform:translateY(-4px);border-color:rgba(139,92,246,.25);}
+.mentor-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:18px;font-weight:800;color:#fff;flex-shrink:0;}
+.mentor-tag{font-size:11px;font-weight:500;background:var(--surface2);border:1px solid var(--border2);color:var(--muted2);padding:3px 10px;border-radius:20px;}
+.connect-btn{background:var(--purple);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;font-family:var(--font-body);}
+.connect-btn:hover{background:#7C3AED;}
+.connect-btn.connected{background:var(--green);cursor:default;}
+.filter-chip{background:var(--surface);border:1px solid var(--border2);color:var(--muted2);font-size:12px;padding:6px 14px;border-radius:20px;cursor:pointer;transition:all .2s;}
+.filter-chip.active,.filter-chip:hover{background:var(--purple-dim);color:var(--purple);border-color:rgba(139,92,246,.3);}
+</style>
+</head>
+<body>
+<nav class="nav scrolled"><div class="nav-inner">
+  <a href="../index.html" class="nav-logo"><div class="logo-mark">IQ</div><span>Career<strong>IQ</strong></span></a>
+  <div class="nav-links"><a href="dashboard.html" class="nav-link">Dashboard</a><a href="jobs.html" class="nav-link">Jobs</a><a href="resume.html" class="nav-link">Resume</a><a href="mentor.html" class="nav-link active">Mentors</a></div>
+  <div style="display:flex;align-items:center;gap:10px;"><button class="lang-btn" onclick="toggleLang()" id="langBtn">🌐 தமிழ்</button><a href="dashboard.html" class="btn-ghost" data-en="← Back" data-ta="← திரும்பு">← Back</a></div>
+</div></nav>
+
+<div class="page-wrapper">
+<div class="dash-layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-mark" style="width:26px;height:26px;font-size:11px;">IQ</div>Career<strong>IQ</strong></div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span><span data-en="Dashboard" data-ta="டாஷ்போர்டு">Dashboard</span></a>
+      <a href="jobs.html" class="sidebar-link"><span class="sidebar-link-icon">🔍</span><span data-en="Job Search" data-ta="வேலை தேடல்">Job Search</span></a>
+      <a href="skillgap.html" class="sidebar-link"><span class="sidebar-link-icon">📊</span><span data-en="Skill Gap Radar" data-ta="திறன் இடைவெளி ரேடார்">Skill Gap Radar</span></a>
+      <a href="interview.html" class="sidebar-link"><span class="sidebar-link-icon">🧪</span><span data-en="Mock Interview" data-ta="போலி நேர்காணல்">Mock Interview</span></a>
+      <a href="resume.html" class="sidebar-link"><span class="sidebar-link-icon">📄</span><span data-en="Resume Builder" data-ta="ரெஸ்யூம் தயாரிப்பு">Resume Builder</span></a>
+      <a href="mentor.html" class="sidebar-link active"><span class="sidebar-link-icon">👥</span><span data-en="Mentor Connect" data-ta="வழிகாட்டி இணைப்பு">Mentor Connect</span></a>
+    </nav>
+  </aside>
+
+  <main class="dash-content">
+    <div class="dash-header">
+      <h1 data-en="Mentor Connect" data-ta="வழிகாட்டி இணைப்பு">👥 Mentor Connect</h1>
+      <p data-en="AI matches you with the right industry professionals based on your goals and skill gaps." data-ta="AI உங்கள் இலக்குகள் மற்றும் திறன் இடைவெளிகளின் அடிப்படையில் சரியான தொழில் வல்லுநர்களுடன் உங்களை பொருத்துகிறது.">AI matches you with the right industry professionals based on your goals and skill gaps.</p>
+    </div>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem;">
+      <div class="filter-chip active" onclick="filterM(this,'all')" data-en="All Mentors" data-ta="அனைத்து வழிகாட்டிகள்">All Mentors</div>
+      <div class="filter-chip" onclick="filterM(this,'tech')" data-en="Tech & Engineering" data-ta="தொழில்நுட்பம்">Tech & Engineering</div>
+      <div class="filter-chip" onclick="filterM(this,'design')" data-en="Design" data-ta="வடிவமைப்பு">Design</div>
+      <div class="filter-chip" onclick="filterM(this,'data')" data-en="Data & AI" data-ta="தரவு மற்றும் AI">Data & AI</div>
+      <div class="filter-chip" onclick="filterM(this,'ai-match')">🤖 <span data-en="AI Matched for me" data-ta="என்னுக்காக AI பொருத்தப்பட்டது">AI Matched for me</span></div>
+    </div>
+
+    <div class="mentor-grid">
+      <div class="mentor-card">
+        <div style="display:flex;gap:12px;margin-bottom:1rem;align-items:flex-start;">
+          <div class="mentor-avatar" style="background:linear-gradient(135deg,#8B5CF6,#06B6D4);">PR</div>
+          <div style="flex:1;">
+            <div style="font-family:var(--font-head);font-size:15px;font-weight:700;" data-en="Priya R." data-ta="பிரியா R.">Priya R.</div>
+            <div style="font-size:12px;color:var(--muted2);" data-en="Senior Software Engineer" data-ta="மூத்த மென்பொருள் பொறியாளர்">Senior Software Engineer</div>
+            <div style="font-size:12px;color:var(--purple);">Google India</div>
+            <div style="font-size:11px;color:var(--amber);margin-top:3px;">★★★★★ 4.9</div>
+          </div>
+          <div style="background:var(--purple-dim);border:1px solid rgba(139,92,246,.2);color:var(--purple);font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;white-space:nowrap;" data-en="Top match" data-ta="சிறந்த பொருத்தம்">🤖 Top match</div>
+        </div>
+        <p style="font-size:13px;color:var(--muted2);line-height:1.6;margin-bottom:1rem;" data-en="Helping freshers break into top tech companies. Specializes in interview prep and career roadmapping." data-ta="புதியவர்கள் சிறந்த தொழில்நுட்ப நிறுவனங்களில் நுழைய உதவுகிறார்.">Helping freshers break into top tech companies. Specializes in interview prep and career roadmapping.</p>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:1rem;"><span class="mentor-tag">React</span><span class="mentor-tag" data-en="Interview Prep" data-ta="நேர்காணல் தயாரிப்பு">Interview Prep</span><span class="mentor-tag">DSA</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="font-size:11px;color:var(--muted);" data-en="Free sessions: 2 left" data-ta="இலவச அமர்வுகள்: 2 மீதமுள்ளது">Free sessions: 2 left</div>
+          <button class="connect-btn" onclick="connectMentor(this,'Priya')" data-en="Connect" data-ta="இணை">Connect</button>
+        </div>
+      </div>
+
+      <div class="mentor-card">
+        <div style="display:flex;gap:12px;margin-bottom:1rem;align-items:flex-start;">
+          <div class="mentor-avatar" style="background:linear-gradient(135deg,#10B981,#06B6D4);">AK</div>
+          <div style="flex:1;">
+            <div style="font-family:var(--font-head);font-size:15px;font-weight:700;" data-en="Arun K." data-ta="அருண் K.">Arun K.</div>
+            <div style="font-size:12px;color:var(--muted2);" data-en="ML Research Engineer" data-ta="ML ஆராய்ச்சி பொறியாளர்">ML Research Engineer</div>
+            <div style="font-size:12px;color:var(--purple);">Microsoft Research</div>
+            <div style="font-size:11px;color:var(--amber);margin-top:3px;">★★★★★ 4.8</div>
+          </div>
+        </div>
+        <p style="font-size:13px;color:var(--muted2);line-height:1.6;margin-bottom:1rem;" data-en="Passionate about helping students enter AI/ML. Covers fundamentals, project guidance, and research." data-ta="மாணவர்கள் AI/ML-ல் நுழைய உதவ ஆர்வமுள்ளவர்.">Passionate about helping students enter AI/ML. Covers fundamentals, project guidance, and research.</p>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:1rem;"><span class="mentor-tag">Python</span><span class="mentor-tag">ML/DL</span><span class="mentor-tag">NLP</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="font-size:11px;color:var(--muted);" data-en="Next slot: Tomorrow" data-ta="அடுத்த இடம்: நாளை">Next slot: Tomorrow</div>
+          <button class="connect-btn" onclick="connectMentor(this,'Arun')" data-en="Connect" data-ta="இணை">Connect</button>
+        </div>
+      </div>
+
+      <div class="mentor-card">
+        <div style="display:flex;gap:12px;margin-bottom:1rem;align-items:flex-start;">
+          <div class="mentor-avatar" style="background:linear-gradient(135deg,#F59E0B,#EF4444);">SM</div>
+          <div style="flex:1;">
+            <div style="font-family:var(--font-head);font-size:15px;font-weight:700;" data-en="Sneha M." data-ta="ஸ்னேகா M.">Sneha M.</div>
+            <div style="font-size:12px;color:var(--muted2);" data-en="Lead Product Designer" data-ta="முன்னணி தயாரிப்பு வடிவமைப்பாளர்">Lead Product Designer</div>
+            <div style="font-size:12px;color:var(--purple);">Swiggy Design</div>
+            <div style="font-size:11px;color:var(--amber);margin-top:3px;">★★★★★ 4.7</div>
+          </div>
+        </div>
+        <p style="font-size:13px;color:var(--muted2);line-height:1.6;margin-bottom:1rem;" data-en="Portfolio reviews, design process coaching, Figma mastery, and helping designers land dream jobs." data-ta="போர்ட்ஃபோலியோ மதிப்பாய்வுகள், Figma தேர்ச்சி மற்றும் சொப்பன வேலைகளில் தரையிறங்க உதவுதல்.">Portfolio reviews, design process coaching, Figma mastery, and helping designers land dream jobs.</p>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:1rem;"><span class="mentor-tag">Figma</span><span class="mentor-tag">UI/UX</span><span class="mentor-tag" data-en="Portfolio" data-ta="போர்ட்ஃபோலியோ">Portfolio</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="font-size:11px;color:var(--muted);" data-en="Available now" data-ta="இப்போது கிடைக்கிறார்">Available now</div>
+          <button class="connect-btn" onclick="connectMentor(this,'Sneha')" data-en="Connect" data-ta="இணை">Connect</button>
+        </div>
+      </div>
+
+      <div class="mentor-card">
+        <div style="display:flex;gap:12px;margin-bottom:1rem;align-items:flex-start;">
+          <div class="mentor-avatar" style="background:linear-gradient(135deg,#06B6D4,#8B5CF6);">VN</div>
+          <div style="flex:1;">
+            <div style="font-family:var(--font-head);font-size:15px;font-weight:700;" data-en="Vijay N." data-ta="விஜய் N.">Vijay N.</div>
+            <div style="font-size:12px;color:var(--muted2);" data-en="Full Stack Developer" data-ta="முழு ஸ்டாக் டெவலப்பர்">Full Stack Developer</div>
+            <div style="font-size:12px;color:var(--purple);">Infosys BPM</div>
+            <div style="font-size:11px;color:var(--amber);margin-top:3px;">★★★★☆ 4.6</div>
+          </div>
+        </div>
+        <p style="font-size:13px;color:var(--muted2);line-height:1.6;margin-bottom:1rem;" data-en="Guides freshers through web development, project building, GitHub workflow, and interview preparation." data-ta="புதியவர்களை வலை மேம்பாடு, திட்ட கட்டுமானம் மற்றும் நேர்காணல் தயாரிப்பு வழியாக வழிகாட்டுகிறார்.">Guides freshers through web development, project building, GitHub workflow, and interview preparation.</p>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:1rem;"><span class="mentor-tag">Node.js</span><span class="mentor-tag">MongoDB</span><span class="mentor-tag">Git</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="font-size:11px;color:var(--muted);" data-en="Free sessions: 1 left" data-ta="இலவச அமர்வுகள்: 1 மீதமுள்ளது">Free sessions: 1 left</div>
+          <button class="connect-btn" onclick="connectMentor(this,'Vijay')" data-en="Connect" data-ta="இணை">Connect</button>
+        </div>
+      </div>
+
+      <div class="mentor-card">
+        <div style="display:flex;gap:12px;margin-bottom:1rem;align-items:flex-start;">
+          <div class="mentor-avatar" style="background:linear-gradient(135deg,#EF4444,#F59E0B);">RA</div>
+          <div style="flex:1;">
+            <div style="font-family:var(--font-head);font-size:15px;font-weight:700;" data-en="Rakhee A." data-ta="ரகீ A.">Rakhee A.</div>
+            <div style="font-size:12px;color:var(--muted2);" data-en="Data Science Manager" data-ta="தரவு அறிவியல் மேலாளர்">Data Science Manager</div>
+            <div style="font-size:12px;color:var(--purple);">Amazon India</div>
+            <div style="font-size:11px;color:var(--amber);margin-top:3px;">★★★★★ 4.9</div>
+          </div>
+        </div>
+        <p style="font-size:13px;color:var(--muted2);line-height:1.6;margin-bottom:1rem;" data-en="Data analytics, SQL, Python for data science, and breaking into data roles from non-CS backgrounds." data-ta="தரவு பகுப்பாய்வு, SQL, தரவு அறிவியலுக்கான Python மற்றும் CS அல்லாத பின்னணியிலிருந்து தரவு பங்குகளில் நுழைவது.">Data analytics, SQL, Python for data, and breaking into data science roles.</p>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:1rem;"><span class="mentor-tag">SQL</span><span class="mentor-tag">Python</span><span class="mentor-tag">Tableau</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="font-size:11px;color:var(--muted);" data-en="Next slot: Friday" data-ta="அடுத்த இடம்: வெள்ளிக்கிழமை">Next slot: Friday</div>
+          <button class="connect-btn" onclick="connectMentor(this,'Rakhee')" data-en="Connect" data-ta="இணை">Connect</button>
+        </div>
+      </div>
+
+      <div class="mentor-card">
+        <div style="display:flex;gap:12px;margin-bottom:1rem;align-items:flex-start;">
+          <div class="mentor-avatar" style="background:linear-gradient(135deg,#8B5CF6,#10B981);">KS</div>
+          <div style="flex:1;">
+            <div style="font-family:var(--font-head);font-size:15px;font-weight:700;" data-en="Karthik S." data-ta="கார்த்திக் S.">Karthik S.</div>
+            <div style="font-size:12px;color:var(--muted2);" data-en="Startup Founder & CTO" data-ta="ஸ்டார்ட்அப் நிறுவனர் மற்றும் CTO">Startup Founder & CTO</div>
+            <div style="font-size:12px;color:var(--purple);">EduTech Ventures</div>
+            <div style="font-size:11px;color:var(--amber);margin-top:3px;">★★★★☆ 4.5</div>
+          </div>
+        </div>
+        <p style="font-size:13px;color:var(--muted2);line-height:1.6;margin-bottom:1rem;" data-en="Entrepreneurship, startup culture, founding your own tech company, and building products from scratch." data-ta="தொழில்முனைவு, ஸ்டார்ட்அப் கலாச்சாரம் மற்றும் உங்கள் சொந்த தொழில்நுட்ப நிறுவனத்தை நிறுவுவது.">Entrepreneurship, startup culture, founding your own tech company, and building products.</p>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:1rem;"><span class="mentor-tag" data-en="Startup" data-ta="ஸ்டார்ட்அப்">Startup</span><span class="mentor-tag" data-en="Product" data-ta="தயாரிப்பு">Product</span><span class="mentor-tag" data-en="Fundraising" data-ta="நிதி திரட்டல்">Fundraising</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="font-size:11px;color:var(--muted);" data-en="Limited slots" data-ta="வரையறுக்கப்பட்ட இடங்கள்">Limited slots</div>
+          <button class="connect-btn" onclick="connectMentor(this,'Karthik')" data-en="Connect" data-ta="இணை">Connect</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</div>
+
+<!-- CHATBOT -->
+<div id="chatBot" style="position:fixed;bottom:24px;right:24px;z-index:9999;">
+  <div id="chatWindow" style="display:none;width:320px;background:#0E0F14;border:1px solid rgba(139,92,246,.3);border-radius:16px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.4);margin-bottom:12px;"><div style="background:linear-gradient(135deg,#8B5CF6,#06B6D4);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;"><div><div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:#fff;">AI Career Advisor</div><div style="font-size:11px;color:rgba(255,255,255,.8);">Ask about mentors</div></div><button onclick="toggleChat()" style="background:none;border:none;color:#fff;font-size:18px;cursor:pointer;">✕</button></div><div id="chatMessages" style="height:260px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px;"></div><div style="padding:10px 12px;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:8px;"><input id="chatInput" type="text" placeholder="Ask about mentors..." style="flex:1;background:#141720;border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 12px;color:#EEF0F5;font-size:13px;outline:none;font-family:'DM Sans',sans-serif;" onkeypress="if(event.key==='Enter')sendChat()"/><button onclick="sendChat()" style="background:#8B5CF6;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;font-weight:600;">→</button></div></div>
+  <button onclick="toggleChat()" style="width:56px;height:56px;background:linear-gradient(135deg,#8B5CF6,#06B6D4);border:none;border-radius:50%;font-size:22px;cursor:pointer;box-shadow:0 4px 20px rgba(139,92,246,.5);display:flex;align-items:center;justify-content:center;margin-left:auto;">💬</button>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="../js/global.js"></script>
+<script src="../js/chatbot.js"></script>
+<script src="../js/lang.js"></script>
+<script>
+function connectMentor(btn,name){btn.textContent='Connected ✓';btn.classList.add('connected');btn.disabled=true;showToast(`Connected with ${name}! They'll respond within 24 hours.`,'success');}
+function filterM(el,type){document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');showToast(`Showing: ${el.textContent.trim()} mentors`);}
+</script>
+</body>
+</html>
